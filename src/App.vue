@@ -1,17 +1,19 @@
 <template>
   <NavBar/>
   <LandingPage />
+  <ChatBot/>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 import LandingPage from './components/LandingPage.vue'
 import NavBar from './components/NavBar.vue'
+import ChatBot from './components/ChatBot.vue'
 
 export default {
   name: 'App',
   components: {
-    LandingPage,NavBar
+    LandingPage,NavBar,ChatBot
   }
 }
 </script>

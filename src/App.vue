@@ -1,15 +1,17 @@
 <template>
+  <NavBar/>
   <LandingPage />
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 import LandingPage from './components/LandingPage.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    LandingPage
+    LandingPage,NavBar
   }
 }
 </script>

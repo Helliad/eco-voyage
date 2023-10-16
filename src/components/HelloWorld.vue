@@ -29,7 +29,7 @@
     </ul>
   </div>
 </template>
-
+//comment
 <script>
 export default {
   name: 'HelloWorld',

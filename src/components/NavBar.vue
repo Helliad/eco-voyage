@@ -34,6 +34,7 @@
 .navbar {
     background-color: rgba(193, 227, 255, 0.8);
 }
+
 /* 
 .navbar a{
     color: rgb(225, 225, 225);

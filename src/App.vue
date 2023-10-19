@@ -2,6 +2,7 @@
   <NavBar/>
   <LandingPage />
   <ChatBot/>
+  <QuickLinks/>
   <FooterBar/>
 </template>
 
@@ -10,12 +11,13 @@
 import LandingPage from './components/LandingPage.vue'
 import NavBar from './components/NavBar.vue'
 import ChatBot from './components/ChatBot.vue'
+import QuickLinks from './components/QuickLinks.vue'
 import FooterBar from './components/FooterBar.vue'
 
 export default {
   name: 'App',
   components: {
-    LandingPage,NavBar,ChatBot,FooterBar
+    LandingPage,NavBar,ChatBot,FooterBar,QuickLinks
   }
 }
 </script>

@@ -1,28 +1,10 @@
 <template>
-  <NavBar/>
-  <LandingPage />
-  <ChatBot/>
-  <QuickLinks/>
-  <TravelReview/>
-  <FooterBar/>
+  <!-- <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav> -->
+  <router-view/>
 </template>
-
-<script>
-//import HelloWorld from './components/HelloWorld.vue'
-import LandingPage from './components/LandingPage.vue'
-import NavBar from './components/NavBar.vue'
-import ChatBot from './components/ChatBot.vue'
-import QuickLinks from './components/QuickLinks.vue'
-import TravelReview from './components/TravelReview.vue'
-import FooterBar from './components/FooterBar.vue'
-
-export default {
-  name: 'App',
-  components: {
-    LandingPage,NavBar,ChatBot,FooterBar,QuickLinks,TravelReview
-  }
-}
-</script>
 
 <style>
 #app {
@@ -31,5 +13,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

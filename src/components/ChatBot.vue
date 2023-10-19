@@ -1,3 +1,7 @@
+<template>
+    <div></div>
+</template>
+
 <script>
 window.embeddedChatbotConfig = {
   chatbotId: "tA1Gw0QmyQZG4_7Hxn7U4",

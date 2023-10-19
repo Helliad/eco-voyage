@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top">
-        <a class="navbar-brand" href="#">ECO-VOYAGE BALI</a>
+        <a class="navbar-brand ps-4" href="#">ECO-VOYAGE BALI</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
                     <router-link class="nav-link" to="/">Home</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/about">Emissions Calculator</router-link>
+                    <router-link class="nav-link" to="/calculator">Emissions Calculator</router-link>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Chat with us</a>

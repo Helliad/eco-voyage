@@ -1,19 +1,21 @@
-<template>
-    <div class="chatbot fixed-bottom">
-        <input type="checkbox" id="check"> <label class="chat-btn" for="check"> <i class="fa fa-commenting-o comment"></i>
-            <i class="fa fa-close close"></i> </label>
-        <div class="wrapper">
-            <div class="header">
-                <h6>Let's Chat - Online</h6>
-            </div>
-            <div class="text-center p-2"> <span>Please fill out the form to start chat!</span> </div>
-            <div class="chat-form"> <input type="text" class="form-control" placeholder="Name"> <input type="text"
-                    class="form-control" placeholder="Email"> <textarea class="form-control"
-                    placeholder="Your Text Message"></textarea> <button class="btn btn-success btn-block">Submit</button>
-            </div>
-        </div>
-    </div>
-</template>
+<script>
+window.embeddedChatbotConfig = {
+  chatbotId: "tA1Gw0QmyQZG4_7Hxn7U4",
+  domain: "www.chatbase.co"
+};
+
+export default {
+  mounted() {
+    const script = document.createElement("script");
+    script.src = "https://www.chatbase.co/embed.min.js";
+    script.setAttribute("chatbotId", window.embeddedChatbotConfig.chatbotId);
+    script.setAttribute("domain", window.embeddedChatbotConfig.domain);
+    script.defer = true;
+
+    document.body.appendChild(script);
+  },
+};
+</script>
 
 <style>
 body {
@@ -116,3 +118,4 @@ button {
     display: none !important
 }
 </style>
+

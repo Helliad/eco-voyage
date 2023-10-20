@@ -1,104 +1,73 @@
 <template>
-    <div>
-        <h2 class="py-3"> What Travellers Are Saying</h2>
-        <div class="col-3"></div>
-        <h5 id="para" class="mb-3 col-6 fst-italic"> “I am a traveler and Eco-Voyage helps me a lot in finding interesting
-            tourist
-            destinations and of course the price
-            offers is very worth it”.</h5>
-        <div class="col-3"></div>
-    </div>
-    <section>
-        <div class="text-center col-6 mx-auto">
-            <div class="col-md-12" id="carou">
-                <!-- Carousel wrapper -->
-                <div id="carouselBasicExample" class="carousel slide carousel-dark" data-mdb-ride="carousel">
-                    <!-- Inner -->
-                    <div class="carousel-inner">
-                        <!-- Single item -->
-                        <div class="carousel-item active">
-                            <p class="lead font-italic mx-4 mx-md-5">
-                                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
-                                numquam iure provident voluptate esse quasi, voluptas nostrum quisquam!"
-                            </p>
-                            <div class="mt-5 mb-4">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
-                                    class="rounded-circle img-fluid shadow-1-strong" alt="smaple image" width="100"
-                                    height="100" />
-                            </div>
-                            <p class="text-muted mb-0">- Anna Morian</p>
-                        </div>
-
-                        <!-- Single item -->
-                        <div class="carousel-item">
-                            <p class="lead font-italic mx-4 mx-md-5">
-                                "Neque cupiditate assumenda in maiores repudiandae mollitia adipisci maiores
-                                repudiandae mollitia consectetur adipisicing architecto elit sed adipiscing
-                                elit."
-                            </p>
-                            <div class="mt-5 mb-4">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp"
-                                    class="rounded-circle img-fluid shadow-1-strong" alt="smaple image" width="100"
-                                    height="100" />
-                            </div>
-                            <p class="text-muted mb-0">- Teresa May</p>
-                        </div>
-
-                        <!-- Single item -->
-                        <div class="carousel-item">
-                            <p class="lead font-italic mx-4 mx-md-5">
-                                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                                dolore eu fugiat nulla pariatur est laborum neque cupiditate assumenda in
-                                maiores."
-                            </p>
-                            <div class="mt-5 mb-4">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
-                                    class="rounded-circle img-fluid shadow-1-strong" alt="smaple image" width="100"
-                                    height="100" />
-                            </div>
-                            <p class="text-muted mb-0">- Kate Allise</p>
-                        </div>
-                    </div>
-                    <!-- Inner -->
-
-                    <!-- Controls -->
-                    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
-                        data-mdb-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample"
-                        data-mdb-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+    <div class="travel-review col-8 mx-auto">
+        <h1>Travel Reviews</h1>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel row">
+            <div class="carousel-inner">
+                <div class="carousel-item" v-for="(review, index) in reviews" :key="index" :class="{ active: index === 0 }">
+                    <h3>{{ review.title }}</h3>
+                    <p>{{ review.content }}</p>
+                    <p>By: {{ review.user }}</p>
                 </div>
-                <!-- Carousel wrapper -->
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-    </section>
+    </div>
 </template>
 
-<style>
-#card-rev-deck {
-    width: 70%;
-    margin: 0 auto;
+<script>
+export default {
+    data() {
+        return {
+            reviews: [
+                {
+                    title: "Amazing Experience",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    user: "John Doe"
+                },
+                {
+                    title: "Highly Recommended",
+                    content: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                    user: "Jane Smith"
+                },
+                {
+                    title: "Great Service",
+                    content: "Nullam id dolor id nibh ultricies vehicula ut id elit.",
+                    user: "David Johnson"
+                },
+                {
+                    title: "Beautiful Destination",
+                    content: "Donec ullamcorper nulla non metus auctor fringilla.",
+                    user: "Emily Wilson"
+                },
+                {
+                    title: "Memorable Trip",
+                    content: "Vestibulum id ligula porta felis euismod semper.",
+                    user: "Michael Brown"
+                }
+            ]
+        };
+    }
+};
+</script>
+
+<style scoped>
+.carousel-item {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
 }
 
-#card-rev-deck div img {
-    width: 100px;
-    padding: 15px;
-    padding-bottom: 0px;
-}
-
-#para {
-    margin: 0 auto;
-    margin-bottom: 30px;
-}
-
-#carou{
-    border: 1px solid black;
-    border-radius: 15px;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
 }
 </style>
-<script></script>

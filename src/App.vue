@@ -112,18 +112,6 @@ button {
   resize: none
 }
 
-.form-control:focus,
-.btn:focus {
-  box-shadow: none
-}
-
-.btn,
-.btn:focus,
-.btn:hover {
-  background-color: rgb(17, 17, 61);
-  border: blue
-}
-
 #check {
   display: none !important
 }

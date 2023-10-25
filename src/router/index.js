@@ -4,6 +4,7 @@ import {
 } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CalculatorView from '../views/CalculatorView.vue'
+import RentalView from '../views/RentalView.vue'
 
 const routes = [{
     path: '/',
@@ -14,6 +15,11 @@ const routes = [{
     path: '/calculator',
     name: 'calculator',
     component: CalculatorView
+  },
+  {
+    path: '/rental',
+    name: 'rental',
+    component: RentalView
   }
   // {
   //   path: '/calculator',

@@ -19,7 +19,7 @@
                 </div>
             </div>
         </a>
-        <a class="col mb-4" href="#">
+        <a class="col mb-4" href="/rental">
             <div class="card" id="card3">
                 <img src="../assets/QuickLinks/vehicles.png" class="card-img-top" alt="vehicles">
                 <div class="card-body">

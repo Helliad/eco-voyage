@@ -1,7 +1,7 @@
 <template>
     <div class="travel-review mb-4">
         <h2>Travel Reviews</h2>
-        <div class="card-container col-7 mx-auto">
+        <div class="card-container col-lg-7 col-md-12 mx-auto">
             <div class="card mx-3">
                 <div class="card-body">
                     <div class="row">

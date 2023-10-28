@@ -11,18 +11,10 @@
           </p>
         </div>
         <div class="tab">
-          <button
-            class="btn"
-            :class="{ active: selectedTab === 'car' }"
-            @click="selectTab('car')"
-          >
+          <button class="btn" :class="{ active: selectedTab === 'car' }" @click="selectTab('car')">
             Cars
           </button>
-          <button
-            class="btn"
-            :class="{ active: selectedTab === 'scooter' }"
-            @click="selectTab('scooter')"
-          >
+          <button class="btn" :class="{ active: selectedTab === 'scooter' }" @click="selectTab('scooter')">
             E-Scooters
           </button>
         </div>
@@ -30,40 +22,22 @@
         <div class="pick-container__car-content" v-if="selectedTab === 'car'">
           <!-- Pick car buttons -->
           <div class="pick-box">
-            <button
-              :class="coloringButton('btn1')"
-              @click="changeCar('VW Golf 6', 'btn1')"
-            >
+            <button :class="coloringButton('btn1')" @click="changeCar('VW Golf 6', 'btn1')">
               VW Golf 6
             </button>
-            <button
-              :class="coloringButton('btn2')"
-              @click="changeCar('Audi A1 S-Line', 'btn2')"
-            >
+            <button :class="coloringButton('btn2')" @click="changeCar('Audi A1 S-Line', 'btn2')">
               Audi A1 S-Line
             </button>
-            <button
-              :class="coloringButton('btn3')"
-              @click="changeCar('Toyota Camry', 'btn3')"
-            >
+            <button :class="coloringButton('btn3')" @click="changeCar('Toyota Camry', 'btn3')">
               Toyota Camry
             </button>
-            <button
-              :class="coloringButton('btn4')"
-              @click="changeCar('BMW 320 ModernLine', 'btn4')"
-            >
+            <button :class="coloringButton('btn4')" @click="changeCar('BMW 320 ModernLine', 'btn4')">
               BMW 320 ModernLine
             </button>
-            <button
-              :class="coloringButton('btn5')"
-              @click="changeCar('Mercedes-Benz GLK', 'btn5')"
-            >
+            <button :class="coloringButton('btn5')" @click="changeCar('Mercedes-Benz GLK', 'btn5')">
               Mercedes-Benz GLK
             </button>
-            <button
-              :class="coloringButton('btn6')"
-              @click="changeCar('VW Passat CC', 'btn6')"
-            >
+            <button :class="coloringButton('btn6')" @click="changeCar('VW Passat CC', 'btn6')">
               VW Passat CC
             </button>
           </div>
@@ -73,17 +47,12 @@
             <!-- Car -->
             <div class="pick-car">
               <div v-if="carLoad" class="loader"></div>
-              <img
-                :src="require(`@/assets/${CAR_DATA[selectedCar].img}`)"
-                alt="car_img"
-                @load="setCarLoad(false)"
-              />
+              <img :src="require(`@/assets/${CAR_DATA[selectedCar].img}`)" alt="car_img" @load="setCarLoad(false)" />
             </div>
             <!-- Description -->
             <div class="pick-description shadow">
               <div class="pick-description__price">
-                <span>${{ CAR_DATA[selectedCar].price }}</span
-                >/ rent per day
+                <span>${{ CAR_DATA[selectedCar].price }}</span>/ rent per day
               </div>
               <div class="pick-description__table">
                 <div class="pick-description__table__col">
@@ -121,22 +90,13 @@
           </div>
         </div>
 
-        <div
-          class="pick-container__car-content"
-          v-if="selectedTab === 'scooter'"
-        >
+        <div class="pick-container__car-content" v-if="selectedTab === 'scooter'">
           <!-- Pick car buttons -->
           <div class="pick-box">
-            <button
-              :class="coloringButton('scooter1')"
-              @click="changeScooter('Scooter Model 1', 'scooter1')"
-            >
+            <button :class="coloringButton('scooter1')" @click="changeScooter('Scooter Model 1', 'scooter1')">
               Scooter Model 1
             </button>
-            <button
-              :class="coloringButton('scooter2')"
-              @click="changeScooter('Scooter Model 2', 'scooter2')"
-            >
+            <button :class="coloringButton('scooter2')" @click="changeScooter('Scooter Model 2', 'scooter2')">
               Scooter Model 2
             </button>
           </div>
@@ -146,18 +106,13 @@
             <!-- Car -->
             <div class="pick-car">
               <div v-if="carLoad" class="loader"></div>
-              <img
-                style="width: 350px"
-                :src="require(`@/assets/${SCOOTER_DATA[selectedScooter].img}`)"
-                alt="car_img"
-                @load="setCarLoad(false)"
-              />
+              <img style="width: 350px" :src="require(`@/assets/${SCOOTER_DATA[selectedScooter].img}`)" alt="car_img"
+                @load="setCarLoad(false)" />
             </div>
             <!-- Description -->
             <div class="pick-description shadow">
               <div class="pick-description__price">
-                <span>${{ SCOOTER_DATA[selectedScooter].price }}</span
-                >/ rent per day
+                <span>${{ SCOOTER_DATA[selectedScooter].price }}</span>/ rent per day
               </div>
               <div class="pick-description__table">
                 <div class="pick-description__table__col">
@@ -353,26 +308,34 @@ export default {
 .pick-container__title {
   margin: 0 auto;
   text-align: center;
-  color: #000; /* Replace with your text color */
+  color: #000;
+  /* Replace with your text color */
   max-width: 50rem;
 }
 
 .pick-container__title p {
-  font-size: 16px; /* Replace with your font size */
-  font-family: Arial, sans-serif; /* Replace with your font-family */
-  color: #888; /* Replace with your text color */
+  font-size: 16px;
+  /* Replace with your font size */
+  font-family: Arial, sans-serif;
+  /* Replace with your font-family */
+  color: #888;
+  /* Replace with your text color */
   line-height: 1.5;
 }
 
 .pick-container__title h3 {
-  font-size: 24px; /* Replace with your font size */
-  font-family: Arial, sans-serif; /* Replace with your font-family */
+  font-size: 24px;
+  /* Replace with your font size */
+  font-family: Arial, sans-serif;
+  /* Replace with your font-family */
   font-weight: 500;
 }
 
 .pick-container__title h2 {
-  font-size: 32px; /* Replace with your font size */
-  font-family: Arial, sans-serif; /* Replace with your font-family */
+  font-size: 32px;
+  /* Replace with your font size */
+  font-family: Arial, sans-serif;
+  /* Replace with your font-family */
   margin: 0.5rem 0 1rem 0;
 }
 
@@ -406,7 +369,8 @@ export default {
 }
 
 .pick-box button:hover {
-  background-color: #42b983; /* Replace with your desired hover background color */
+  background-color: #42b983;
+  /* Replace with your desired hover background color */
   color: white;
 }
 
@@ -434,7 +398,8 @@ export default {
 
 .pick-description__price {
   width: 100%;
-  background-color: #42b983; /* Replace with your desired background color */
+  background-color: #42b983;
+  /* Replace with your desired background color */
   font-size: 1.8rem;
   display: flex;
   align-items: center;
@@ -477,8 +442,10 @@ export default {
   text-decoration: none;
   font-weight: 600;
   color: white;
-  font-family: Arial, sans-serif; /* Replace with your font-family */
-  background-color: #42b983; /* Replace with your desired background color */
+  font-family: Arial, sans-serif;
+  /* Replace with your font-family */
+  background-color: #42b983;
+  /* Replace with your desired background color */
   padding: 1rem 1rem;
   display: flex;
   width: 100%;
@@ -495,6 +462,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 .car-btn {
   border-radius: 10px;
 }
@@ -538,6 +506,7 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

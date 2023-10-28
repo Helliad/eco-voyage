@@ -131,13 +131,13 @@
               :class="coloringButton('scooter1')"
               @click="changeScooter('Scooter Model 1', 'scooter1')"
             >
-              Scooter Model 1
+              Gesits Raya
             </button>
             <button
               :class="coloringButton('scooter2')"
               @click="changeScooter('Scooter Model 2', 'scooter2')"
             >
-              Scooter Model 2
+              Bold Cruiser
             </button>
           </div>
 
@@ -165,16 +165,16 @@
                   <span>{{ SCOOTER_DATA[selectedScooter].model }}</span>
                 </div>
                 <div class="pick-description__table__col">
-                  <span>Mark</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].mark }}</span>
+                  <span>Brand</span>
+                  <span>{{ SCOOTER_DATA[selectedScooter].brand }}</span>
                 </div>
                 <div class="pick-description__table__col">
-                  <span>Year</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].year }}</span>
+                  <span>Max Speed</span>
+                  <span>{{ SCOOTER_DATA[selectedScooter].maxSpeed }}</span>
                 </div>
                 <div class="pick-description__table__col">
-                  <span>Doors</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].doors }}</span>
+                  <span>Motor</span>
+                  <span>{{ SCOOTER_DATA[selectedScooter].motor }}</span>
                 </div>
                 <div class="pick-description__table__col">
                   <span>CO2 Emission</span>
@@ -185,8 +185,8 @@
                   <span>{{ SCOOTER_DATA[selectedScooter].transmission }}</span>
                 </div>
                 <div class="pick-description__table__col">
-                  <span>Fuel</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].fuel }}</span>
+                  <span>Battery</span>
+                  <span>{{ SCOOTER_DATA[selectedScooter].battery }}</span>
                 </div>
               </div>
               <!-- Button CTA -->
@@ -289,23 +289,25 @@ export default {
     SCOOTER_DATA() {
       return {
         "Scooter Model 1": {
-          price: "10",
+          price: "15",
           img: "scooter-1.png",
-          model: "Scooter Model 1",
-          brand: "Scooter Brand 1",
-          year: "2022",
-          maxSpeed: "25 km/h",
-          battery: "36V Lithium",
+          model: "Raya",
+          brand: "Gesits",
+          maxSpeed: '70km/h',
+          motor: "Permanent Magnet Synchronous – BLDC Motor",
+          transmission: "Pulley belt",
+          battery: "72V 20Ah",
           co2Emission: this.getRandomCO2Value(),
         },
         "Scooter Model 2": {
-          price: "12",
+          price: "10",
           img: "scooter-2.png",
-          model: "Scooter Model 2",
-          brand: "Scooter Brand 2",
-          year: "2023",
-          maxSpeed: "30 km/h",
-          battery: "48V Lithium",
+          model: "Cruiser",
+          brand: "Bold",
+          maxSpeed: "42km/h",
+          motor: "500W",
+          transmission: 'Pulley belt',
+          battery: "48V 21AH",
           co2Emission: this.getRandomCO2Value(),
         },
         // Add more e-scooter data here...

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top col-11 mx-auto mt-2 rounded-3 px-3">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <a class="navbar-brand ps-4" href="#">ECO-VOYAGE BALI</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,16 +13,12 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/calculator">Emissions Calculator</router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/rental">Rental View</router-link>
-                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Chat with us</a>
                 </li> -->
             </ul>
         </div>
     </nav>
-    
 </template>
 
 <style>
@@ -36,7 +32,7 @@
 }
 
 .navbar {
-    background-color: rgba(193, 227, 255);
+    background-color: rgba(193, 227, 255, 0.8);
 }
 
 /* 

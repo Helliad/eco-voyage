@@ -24,61 +24,60 @@
       return {
         activities: [
           {
-            title: "Spiritual Guidance with Traditional Balinese Healer",
+            title: "Mount Batur Sunrise Hiking With Breakfast",
             url:
-              "https://www.seeksophie.com/experiences/bali-1-hr-private-reading-with-balinese-healer-oe6z2ekdzn",
-              image: "locations/healer.png",
+              "https://www.booking.com/attractions/id/prjuegtw7kml-mount-batur-guided-sunrise-hike.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=02%3A00",
+              image: "locations/sunsethiking.png",
           },
           {
-            title: "Munduk: Ancient Jungle Trekking and Remote Waterfalls Adventure",
+            title: "Admission to Garuda Wisnu Kencana Cultural Park",
             url:
-              "https://www.seeksophie.com/experiences/bali-full-day-jungle-trekking-and-canoeing-in-tamblingan-lake-banyumala-waterfalls-bali-munduk-o035r874z9",
-            image: "locations/munduk.png",
+              "https://www.booking.com/attractions/id/prd7n5bnxb8r-admission-to-garuda-wisnu-kencana-cultural-park.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=00%3A00&ticket_type=OFn9hO6T5rxA",
+            image: "locations/garudapark.png",
           },
           {
-            title: "Make Your Own Silver Jewellery from Scratch in Sidemen",
+            title: "Ayung River Rafting with Optional Waterfalls Trip",
             url:
-              "https://www.seeksophie.com/experiences/bali-make-your-own-silver-jewellery-in-sidemen-o9g5883p5n",
-            image: "locations/sidemen.png",
+              "https://www.booking.com/attractions/id/pr7tngepj8si-ayung-river-rafting-with-optional-waterfalls-trip.html?source=searchresults-product-card&ufi=-2701757",
+            image: "locations/riverrafting.png",
           },
           {
-            title: "Saving Bali's Sea Turtles: Join the Conservation Effort",
+            title: "Bali Snorkeling Tour at Blue Lagoon Beach: Private Transfer All-Inclusive",
             url:
-              "https://www.seeksophie.com/experiences/bali-bali-sea-turtle-experience-conservation-and-connection-with-ancient-marine-life-oxp5wy3vzr",
-            image: "locations/turtle.png",
+              "https://www.booking.com/attractions/id/pr0amstlvyrk-blue-lagoon-snorkeling-tour.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=08%3A00",
+            image: "locations/snorkeling.png",
           },
           {
-            title: "Mt Batur Sunrise Jeep | Hot Springs & ATV Add-ons",
-            url: "https://www.seeksophie.com/experiences/bali-sunrise-jeep-adventure-tour-oxp5w7xvzr",
-            image: "locations/atv.png",
+            title: "Ubud Cycling Tour",
+            url: "https://www.booking.com/attractions/id/pran0vfqgmag-bali-cycling-tour-in-ubud.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31",
+            image: "locations/cycling.png",
           },
           {
-            title: "Fireflies Safari with Local Conservationist",
+            title: "Private Central Bali Tour",
+            url:"https://www.booking.com/attractions/id/pryr2rohk10f-private-central-bali-tour.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=00%3A00&ticket_type=OFEpOfH5Ff1O",
+            image: "locations/privatetour.png",
+          },
+          {
+            title: "Jatiluwih in detail (1 h. e-bike tour in the rice terraces)",
+            url: "https://www.booking.com/attractions/id/pr7zo9wmro3b-electric-bike-tour-of-jatiluwih.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=12%3A30&ticket_type=OFvFoJqpY9pL",
+            image: "locations/ebike.png",
+          },
+          {
+            title: "Nusa Penida Instagram Tour",
             url:
-              "https://www.seeksophie.com/experiences/bali-fireflies-night-safari-with-the-local-conservationist-oxp5w10vzr",
-            image: "locations/fireflies.png",
+              "https://www.booking.com/attractions/id/prvhv0esqo5f-nusa-penida-instagram-tour.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=00%3A00",
+            image: "locations/instatour.png",
           },
           {
-            title: "Private Mt Batur Sunrise Trek | Unique Route & Boat Ride",
-            url: "https://www.seeksophie.com/experiences/bali-caldera-trek-boat-ride-o9g584gpzn",
-            image: "locations/batur.png",
-          },
-          {
-            title: "Journey to Mystical Bali Temples with Balinese Healer",
+            title: "Uluwatu Sunset Temple Tour",
             url:
-              "https://www.seeksophie.com/experiences/bali-1-day-tamblingan-jungle-spiritual-journey-oogz4k7x51",
-            image: "locations/healer.png",
+              "https://www.booking.com/attractions/id/prljaqounaeg-sunset-tour-of-uluwatu-temple.html?source=searchresults-product-card&ufi=-2701757&date=2023-10-31&start_time=14%3A30&ticket_type=OF9gQ18C7P7T",
+            image: "locations/sunsettemple.png",
           },
           {
-            title: "Nusa Penida Highlights & Snorkelling | Small Group Trip",
+            title: "Soul Purification at Pura Mengening in Bali",
             url:
-              "https://www.seeksophie.com/experiences/bali-explore-nusa-penida-small-group-bali-hotel-transfer-omwjy7mxjl",
-            image: "locations/snorkel.png",
-          },
-          {
-            title: "Melukat Balinese Purification Ceremony",
-            url:
-              "https://www.seeksophie.com/experiences/bali-a-balinese-soul-purification-ceremony-ol2zeo0e57",
+              "https://www.booking.com/attractions/id/prfjbgkics24-soul-purification-experience.html?source=searchresults-product-card&ufi=-2701757&date=2023-11-01&start_time=08%3A00&ticket_type=OF7wh2hQ7hWg",
             image: "locations/purification.png",
           },
         ],

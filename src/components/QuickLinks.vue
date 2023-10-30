@@ -10,7 +10,7 @@
                 </div>
             </div>
         </a>
-        <a class="col mb-4"  href="#">
+        <a class="col mb-4"  href="/location">
             <div class="card"  id="card2">
                 <img src="../assets/QuickLinks/activities.png" class="card-img-top" alt="activities">
                 <div class="card-body" >

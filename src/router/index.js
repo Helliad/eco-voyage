@@ -5,7 +5,7 @@ import {
 import HomeView from '../views/HomeView.vue'
 import CalculatorView from '../views/CalculatorView.vue'
 import RentalView from '../views/RentalView.vue'
-
+import LocationView from '../views/LocationView.vue'
 const routes = [{
     path: '/',
     name: 'home',
@@ -20,6 +20,11 @@ const routes = [{
     path: '/rental',
     name: 'rental',
     component: RentalView
+  },
+  {
+    path: '/location',
+    name: 'location',
+    component: LocationView
   }
   // {
   //   path: '/calculator',

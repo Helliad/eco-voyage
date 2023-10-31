@@ -20,7 +20,7 @@ import FooterBar from '@/components/FooterBar.vue'
 export default {
   name: 'HomeView',
   components: {
-    LandingPage,NavBar,FooterBar,QuickLinks,TravelReview
-  }
+    LandingPage, NavBar, FooterBar, QuickLinks, TravelReview
+}
 }
 </script>

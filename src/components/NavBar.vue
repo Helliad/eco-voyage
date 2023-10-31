@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/rental">Rental View</router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/accoms">Accomodations</router-link>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Chat with us</a>
                 </li> -->

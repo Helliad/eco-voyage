@@ -1,33 +1,31 @@
 <template>
-    <div class="landingpage">
-        <div class="jumbotron position-relative">
-            <img src="..\..\src\assets\jumbotron_img.png" alt="Image description">
-            <div class="position-absolute top-0 translate-middle text-start rounded shadow p-3 " id="jumbo-text">
-                <h1 class="display-4">Discover Bali's Natural Wonders</h1>
-                <p class="lead">And Preserve Its Future</p>
-                <!-- <hr class="my-4">
-                <p>Feel free to explore and learn more about Vue.js.</p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+    <section class="py-lg-16 py-6">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class=" col-xxl-5  col-xl-6 col-lg-6 col-12">
+                    <div class="text-start">
+                        <h1 class="display-3 fw-bold mb-3">Discover Bali's Natural Wonders <u class="text-warning"><span
+                                    class="text-success">Sustainably</span></u></h1>
+                        <p class="lead mb-4">Bali's booming tourism industry has negatively impacted the environment, from carbon footprints to plastic waste, and learn how you can plan your trip sustainably...
+                        </p>
+                        <a href="#" class="btn btn-success btn mb-4">See Some Sustainable Itineraries</a>
+                    </div>
+                </div>
+                <div class="col-xxl-5 offset-xxl-1 col-xl-6 col-lg-6 col-12 d-lg-flex justify-content-end">
+                    <div class="mt-12 mt-lg-0 position-relative">
+
+                        <img src="..\..\src\assets\jumbotron_img.png" alt="online course"
+                            class="img-fluid rounded-4 w-100 z-1 position-relative">
+
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <style>
-.jumbotron {
-    background-color: #f8f9fa;
+section{
+    margin:20px 0;
 }
-
-.jumbotron img {
-    width: 100%;
-}
-
-#jumbo-text{
-    margin-top: 20%;
-    margin-left:40%;
-    color:rgb(240, 240, 240);
-    background-color:  rgba(63, 74, 84, 0.2);
-}
-
-
 </style>

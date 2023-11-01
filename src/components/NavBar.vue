@@ -1,8 +1,8 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top col-11 mx-auto mt-2 rounded-3 px-3">
-        <a class="navbar-brand ps-4" href="#">ECO-VOYAGE BALI</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-brand ps-4" >ECO-VOYAGE BALI</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -51,5 +51,3 @@
     margin-left: auto;
 }
 </style>
-<script>
-</script>

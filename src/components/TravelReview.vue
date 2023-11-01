@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-3 ">
                             <img src="../assets/logo.png" alt="User Photo" class="user-photo">
                         </div>
                         <div class="col-9">
@@ -60,6 +60,10 @@ export default {
 </script>
 
 <style scoped>
+
+h2 {
+  padding: 30px 0px;
+}
 .user-photo {
     width: 100%;
     height: auto;
@@ -81,4 +85,11 @@ export default {
 .card-container {
     display: flex;
 }
+/* to make the cards vertically aligned
+
+.card-body {
+  display: flex;
+  align-items: center;    
+} */
+
 </style>

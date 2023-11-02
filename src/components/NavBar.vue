@@ -1,53 +1,64 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <span class="navbar-brand ps-4" >ECO-VOYAGE BALI</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/">Home</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/calculator">Emissions Calculator</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/rental">Rental View</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/accoms">Accomodations</router-link>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Chat with us</a>
-                </li> -->
-            </ul>
-        </div>
+      <span class="navbar-brand ps-4" >ECO-VOYAGE BALI</span>
+      <button class="navbar-toggler" type="button" @click="toggleNavbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" :class="{ show: isNavbarCollapsed }" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" @click="isNavbarCollapsed = false">
+            <router-link class="nav-link" to="/">Home</router-link>
+          </li>
+          <li class="nav-item" @click="isNavbarCollapsed = false">
+            <router-link class="nav-link" to="/calculator">Emissions Calculator</router-link>
+          </li>
+          <li class="nav-item" @click="isNavbarCollapsed = false">
+            <router-link class="nav-link" to="/rental">Rental View</router-link>
+          </li>
+          <li class="nav-item" @click="isNavbarCollapsed = false">
+            <router-link class="nav-link" to="/accoms">Accomodations</router-link>
+          </li>
+        </ul>
+      </div>
     </nav>
-    
-</template>
-
-<style>
-.navbar-brand {
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        isNavbarCollapsed: false,
+      };
+    },
+    methods: {
+      toggleNavbarCollapse() {
+        this.isNavbarCollapsed = !this.isNavbarCollapsed;
+      },
+    },
+  };
+  </script>
+  
+  <style>
+  .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
-}
-
-.navbar-nav .nav-link {
+  }
+  
+  .navbar-nav .nav-link {
     font-size: 1.2rem;
-}
-
-.navbar {
+  }
+  
+  .navbar {
     background-color: rgba(193, 227, 255);
-}
-
-/* 
-.navbar a{
-    color: rgb(225, 225, 225);
-} */
-
-.navbar-nav {
+  }
+  
+  /* 
+  .navbar a{
+      color: rgb(225, 225, 225);
+  } */
+  
+  .navbar-nav {
     margin-left: auto;
-}
-</style>
+  }
+  </style>
+  

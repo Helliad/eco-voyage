@@ -1,26 +1,39 @@
 <template>
-    <div class="travel-review col-8 mx-auto">
-        <h1>Travel Reviews</h1>
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item" v-for="(review, index) in reviews" :key="index" :class="{ active: index === 0 }">
-                    <div class="slide-content d-flex flex-column justify-content-between align-items-center">
-                    <h3>{{ review.title }}</h3>
-                    <p>{{ review.content }}</p>
-                    <p>By: {{ review.user }}</p>
+    <div class="travel-review mb-4">
+        <h2>Travel Reviews</h2>
+        <div class="card-group col-lg-7 col-md-12 mx-auto">
+            <div class="card mx-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="../assets/logo.png" alt="User Photo" class="user-photo">
+                        </div>
+                        <div class="col-9">
+                            <h5 class="card-title">{{ reviews[0].name }}</h5>
+                            <p class="card-text">{{ reviews[0].review }}</p>
+                            <div class="stars">
+                                <span v-for="(star, index) in reviews[0].stars" class="star" :key="index"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3 ">
+                            <img src="../assets/logo.png" alt="User Photo" class="user-photo">
+                        </div>
+                        <div class="col-9">
+                            <h5 class="card-title">{{ reviews[1].name }}</h5>
+                            <p class="card-text">{{ reviews[1].review }}</p>
+                            <div class="stars">
+                                <span v-for="(star, index) in reviews[1].stars" class="star" :key="index"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -31,29 +44,14 @@ export default {
         return {
             reviews: [
                 {
-                    title: "Amazing Experience!",
-                    content: "Everything we needed before and during the travel were provided promptly. Very good service.",
-                    user: "John Doe"
+                    name: "John Doe",
+                    review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    stars: 4
                 },
                 {
-                    title: "Highly Recommended!",
-                    content: "Eco-Voyage made travel planning so much simpler and sustainable!",
-                    user: "Jane Smith"
-                },
-                {
-                    title: "I love Bali",
-                    content: "Everything was top notch. It went beyond our expectations. Thanks Eco-Voyage for helping me enjoy Bali more.",
-                    user: "David Johnson"
-                },
-                {
-                    title: "Beautiful Destination",
-                    content: "Everything was so perfect that we were able to see all the key destinations of Bali.",
-                    user: "Emily Wilson"
-                },
-                {
-                    title: "Memorable Trip",
-                    content: "Thanks for helping me create such a well organised itinerary and making the entire trip soo smooth and hassle free.",
-                    user: "Michael Brown"
+                    name: "Jane Smith",
+                    review: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                    stars: 5
                 }
             ]
         };
@@ -62,24 +60,36 @@ export default {
 </script>
 
 <style scoped>
-.carousel-item {
-    padding: 20px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
+
+h2 {
+  padding: 30px 0px;
 }
-.carousel-inner {
-  /* Set a fixed height for the carousel */
-  max-height: 200px; /* Adjust this to your desired height */
+.user-photo {
+    width: 100%;
+    height: auto;
 }
 
-.slide-content {
-    max-height: 200px; /* Set a fixed maximum height for the content */
-    overflow-y: auto; /* Add a vertical scrollbar if content exceeds the height */
-    padding: 20px;
-    border: 1px solid #ccc;
+.stars {
+    color: gold;
 }
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: invert(100%);
+
+.star {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: gold;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    margin-right: 5px;
 }
+
+.card-container {
+    display: flex;
+}
+/* to make the cards vertically aligned
+
+.card-body {
+  display: flex;
+  align-items: center;    
+} */
+
 </style>

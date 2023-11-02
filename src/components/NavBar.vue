@@ -1,8 +1,8 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <a class="navbar-brand ps-4" href="#">ECO-VOYAGE BALI</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-brand ps-4" >ECO-VOYAGE BALI</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -13,12 +13,19 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/calculator">Emissions Calculator</router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/rental">Rental View</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/accoms">Accomodations</router-link>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Chat with us</a>
                 </li> -->
             </ul>
         </div>
     </nav>
+    
 </template>
 
 <style>
@@ -32,7 +39,7 @@
 }
 
 .navbar {
-    background-color: rgba(193, 227, 255, 0.8);
+    background-color: rgba(193, 227, 255);
 }
 
 /* 
@@ -44,5 +51,3 @@
     margin-left: auto;
 }
 </style>
-<script>
-</script>

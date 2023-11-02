@@ -3,8 +3,8 @@
     <div class="container">
       <div class="pick-container">
         <div class="pick-container__title">
-          <h3 style="margin-bottom: -1.5rem">Vehicle Models</h3>
-          <h2 style="margin-bottom: -1.5rem">Our rental fleet</h2>
+          <h3>Vehicle Models</h3>
+          <h2>Our rental fleet</h2>
           <p>
             Choose from a variety of our amazing vehicles to rent for your next
             adventure or business trip

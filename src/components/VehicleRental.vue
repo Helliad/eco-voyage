@@ -6,39 +6,38 @@
           <h3>Vehicle Models</h3>
           <h2>Our rental fleet</h2>
           <p>
-            Choose from a variety of our amazing vehicles to rent for your next
-            adventure or business trip
+            Choose from a variety of our eco-friendly vehicles to rent for your next
+            adventure in Bali
           </p>
         </div>
-        <div class="tab">
-          <button class="btn" :class="{ active: selectedTab === 'car' }" @click="selectTab('car')">
-            Cars
-          </button>
-          <button class="btn" :class="{ active: selectedTab === 'scooter' }" @click="selectTab('scooter')">
-            E-Scooters
-          </button>
-        </div>
 
-        <div class="pick-container__car-content" v-if="selectedTab === 'car'">
+
+        <div class="pick-container__car-content">
           <!-- Pick car buttons -->
           <div class="pick-box">
-            <button :class="coloringButton('btn1')" @click="changeCar('VW Golf 6', 'btn1')">
-              VW Golf 6
+            <button
+              :class="coloringButton('btn2')"
+              @click="changeCar('Toyota Avanza', 'btn2')"
+            >
+              Toyota Avanza
             </button>
-            <button :class="coloringButton('btn2')" @click="changeCar('Audi A1 S-Line', 'btn2')">
-              Audi A1 S-Line
+            <button
+              :class="coloringButton('btn3')"
+              @click="changeCar('Toyota Kijang', 'btn3')"
+            >
+              Toyota Kijang Innova
             </button>
-            <button :class="coloringButton('btn3')" @click="changeCar('Toyota Camry', 'btn3')">
-              Toyota Camry
+            <button
+              :class="coloringButton('btn4')"
+              @click="changeCar('Toyota Innova', 'btn4')"
+            >
+              Toyota Innova
             </button>
-            <button :class="coloringButton('btn4')" @click="changeCar('BMW 320 ModernLine', 'btn4')">
-              BMW 320 ModernLine
-            </button>
-            <button :class="coloringButton('btn5')" @click="changeCar('Mercedes-Benz GLK', 'btn5')">
-              Mercedes-Benz GLK
-            </button>
-            <button :class="coloringButton('btn6')" @click="changeCar('VW Passat CC', 'btn6')">
-              VW Passat CC
+            <button
+              :class="coloringButton('btn5')"
+              @click="changeCar('Toyota Agya', 'btn5')"
+            >
+              Toyota Agya
             </button>
           </div>
 
@@ -52,7 +51,8 @@
             <!-- Description -->
             <div class="pick-description shadow">
               <div class="pick-description__price">
-                <span>${{ CAR_DATA[selectedCar].price }}</span>/ rent per day
+                <span>${{ CAR_DATA[selectedCar].price }}</span
+                ><p>/ DAY</p>
               </div>
               <div class="pick-description__table">
                 <div class="pick-description__table__col">
@@ -89,190 +89,85 @@
             </div>
           </div>
         </div>
-
-        <div class="pick-container__car-content" v-if="selectedTab === 'scooter'">
-          <!-- Pick car buttons -->
-          <div class="pick-box">
-            <button :class="coloringButton('scooter1')" @click="changeScooter('Scooter Model 1', 'scooter1')">
-              Scooter Model 1
-            </button>
-            <button :class="coloringButton('scooter2')" @click="changeScooter('Scooter Model 2', 'scooter2')">
-              Scooter Model 2
-            </button>
-          </div>
-
-          <!-- CarBox content based on selected car -->
-          <div v-if="SCOOTER_DATA[selectedScooter]" class="box-cars">
-            <!-- Car -->
-            <div class="pick-car">
-              <div v-if="carLoad" class="loader"></div>
-              <img style="width: 350px" :src="require(`@/assets/${SCOOTER_DATA[selectedScooter].img}`)" alt="car_img"
-                @load="setCarLoad(false)" />
-            </div>
-            <!-- Description -->
-            <div class="pick-description shadow">
-              <div class="pick-description__price">
-                <span>${{ SCOOTER_DATA[selectedScooter].price }}</span>/ rent per day
-              </div>
-              <div class="pick-description__table">
-                <div class="pick-description__table__col">
-                  <span>Model</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].model }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Brand</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].brand }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Max Speed</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].maxSpeed }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Motor</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].motor }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>CO2 Emission</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].co2Emission }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Transmission</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].transmission }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Battery</span>
-                  <span>{{ SCOOTER_DATA[selectedScooter].battery }}</span>
-                </div>
-              </div>
-              <!-- Button CTA -->
-              <a class="cta-btn" href="#booking-section">Reserve Now</a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
+  <CarCalculatorEmissions :co2Emission="computedCO2Emission" /> 
 </template>
 
 <script>
+import CarCalculatorEmissions from "./CarCalculatorEmissions.vue";
 export default {
+  components: {
+    CarCalculatorEmissions,
+  },
   data() {
     return {
-      selectedCar: "VW Golf 6",
+      selectedCar: "Toyota Avanza",
       selectedScooter: "Scooter Model 1",
       carLoad: true,
       selectedTab: "car",
     };
   },
   computed: {
+    computedCO2Emission() {
+      // Compute the CO2 emission value based on CAR_DATA[selectedCar]
+      return this.CAR_DATA[this.selectedCar].co2Emission;
+    },
     CAR_DATA() {
       return {
-        "VW Golf 6": {
-          price: "37",
-          img: "golf6.jpg",
-          model: "Golf 6",
-          mark: "Volkswagen",
-          year: "2008",
-          doors: "4/5",
-          air: "Yes",
-          transmission: "Manual",
-          fuel: "Diesel",
-          co2Emission: this.getRandomCO2Value(),
-        },
-        "Audi A1 S-Line": {
-          price: "45",
-          img: "audia1.jpg",
-          model: "Audi",
-          mark: "A1",
-          year: "2012",
-          doors: "4/5",
-          air: "Yes",
-          transmission: "Manual",
-          fuel: "Gasoline",
-          co2Emission: this.getRandomCO2Value(),
-        },
-        "Toyota Camry": {
-          price: "30",
-          img: "toyotacamry.jpg",
-          model: "Camry",
+        "Toyota Avanza": {
+          price: "80 to $100 ",
+          img: "toyotaavanza.jpeg",
+          model: "Avanza",
           mark: "Toyota",
-          year: "2006",
+          year: "2020",
+          doors: "6",
+          air: "Yes",
+          transmission: "Automatic",
+          fuel: "Hybrid",
+          co2Emission: 172
+        },
+        "Toyota Kijang": {
+          price: "100 to $115",
+          img: "kijang.jpeg",
+          model: "Kijang",
+          mark: "Toyota",
+          year: "2007",
           doors: "4/5",
           air: "Yes",
           transmission: "Automatic",
           fuel: "Hybrid",
-          co2Emission: this.getRandomCO2Value(),
+          co2Emission: 149
         },
-        "BMW 320 ModernLine": {
-          price: "35",
-          img: "bmw320.jpg",
-          model: "320",
-          mark: "BMW",
-          year: "2012",
-          doors: "4/5",
-          air: "Yes",
-          transmission: "Manual",
-          fuel: "Diesel",
-          co2Emission: this.getRandomCO2Value(),
-        },
-        "Mercedes-Benz GLK": {
-          price: "50",
-          img: "benz.jpg",
-          model: "Benz GLK",
-          mark: "Mercedes",
-          year: "2006",
-          doors: "4/5",
-          air: "Yes",
-          transmission: "Manual",
-          fuel: "Diesel",
-          co2Emission: this.getRandomCO2Value(),
-        },
-        "VW Passat CC": {
-          price: "25",
-          img: "passatcc.jpg",
-          model: "Passat CC",
-          mark: "Volkswagen",
-          year: "2008",
-          doors: "4/5",
+        "Toyota Innova": {
+          price: "100 to $115",
+          img: "innova.png",
+          model: "Innova",
+          mark: "Toyota",
+          year: "2022",
+          doors: "7",
           air: "Yes",
           transmission: "Automatic",
-          fuel: "Gasoline",
-          co2Emission: this.getRandomCO2Value(),
+          fuel: "Hybrid",
+          co2Emission: 131.3
         },
-      };
-    },
-    SCOOTER_DATA() {
-      return {
-        "Scooter Model 1": {
-          price: "15",
-          img: "scooter-1.png",
-          model: "Raya",
-          brand: "Gesits",
-          maxSpeed: '70km/h',
-          motor: "Permanent Magnet Synchronous – BLDC Motor",
-          transmission: "Pulley belt",
-          battery: "72V 20Ah",
-          co2Emission: this.getRandomCO2Value(),
+        "Toyota Agya": {
+          price: "60 to $75",
+          img: "Toyota-Agya-1.jpg",
+          model: "Agya",
+          mark: "Toyota",
+          year: "2021",
+          doors: "4",
+          air: "Yes",
+          transmission: "Automatic",
+          fuel: "Hybrid",
+          co2Emission: 113,
         },
-        "Scooter Model 2": {
-          price: "10",
-          img: "scooter-2.png",
-          model: "Cruiser",
-          brand: "Bold",
-          maxSpeed: "42km/h",
-          motor: "500W",
-          transmission: 'Pulley belt',
-          battery: "48V 21AH",
-          co2Emission: this.getRandomCO2Value(),
-        },
-        // Add more e-scooter data here...
       };
     },
   },
   methods: {
-    getRandomCO2Value() {
-      return (Math.random() * (200 - 50) + 50).toFixed(2); // Random value between 50 and 200
-    },
     changeCar(carName, buttonID) {
       this.selectedCar = carName;
       this.colorBtn = buttonID;

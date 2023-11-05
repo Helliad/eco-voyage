@@ -1,6 +1,6 @@
 <template>
     <div class="pick-container__title" style="padding-top: 60px;">
-        <h2 style="margin-bottom: -1.5rem">Recommended Eco-friendly Locations</h2>
+        <h2>Recommended Eco-friendly Locations</h2>
           <p>
             Choose from one of our compiled sustainable locations to visit for your next
             adventure!
@@ -9,7 +9,7 @@
     <div class="container">
       <div class="card" v-for="(activity, index) in activities" :key="index">
         <a :href="activity.url" target="_blank">
-          <img :src="activity.image" :alt="activity.title" style="margin-bottom: -1.5rem"/>
+          <img :src="activity.image" :alt="activity.title"/>
           <div class="card-content">
             <h2 class="card-title">{{ activity.title }}</h2>
           </div>

@@ -1,40 +1,118 @@
 <template>
-  <div id="searchInput">
-    <input type="text" id="text" placeholder="Enter a location">
-    <input type="text" id="checkIn" placeholder="Check-In(YYYY-MM-DD)">
-    <input type="text" id="checkOut" placeholder="Check-Out(YYYY-MM-DD)">
-    <input type="text" id="adultNo" placeholder="Number of adults">
-    <input type="text" id="roomNo" placeholder="Number of rooms">
-    <select id="orderSelect">
-      <option value="popularity">Popularity</option>
-      <option value="class_descending">Stars (5 to 1)</option>
-      <option value="class_ascending">Stars (1 to 5)</option>
-      <option value="review_score">Guest Review Score</option>
-      <option value="price">Price (low to high)</option>
-    </select>
-    <button id="searchButton" @click="getDestination">Search Accommodations</button>
-  </div>
-
-  <table id="table" class="table table-success">
-
-  </table>
+        <div class="pick-container__title">
+          <h3 style="margin-top: 1rem;">Accomodations Finder</h3>
+          <h2>Find the perfect accommodations for your next adventure!</h2>
+          <p>
+            Search, compare, and book hotels that suit your travel needs       
+          </p>
+        </div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div id="searchInput" class="text-center">
+          <input type="text" class="form-control mb-2" v-model="checkIn" placeholder="Check In date" onfocusin="(this.type='date')" onfocusout="(this.type='text')"/>
+          <input type="text" class="form-control mb-2" v-model="checkOut" placeholder="Check Out date" onfocusin="(this.type='date')" onfocusout="(this.type='text')"/>
+          <input type="text" class="form-control mb-2" v-model="adultNo" placeholder="Number of adults" />
+          <input type="text" class="form-control mb-2" v-model="roomNo" placeholder="Number of rooms" />
+          <select class="form-select mb-2" v-model="orderSelect">
+            <option value="popularity">Popularity</option>
+            <option value="class_descending">Stars (5 to 2)</option>
+            <option value="class_ascending">Stars (2 to 5)</option>
+            <option value="review_score">Guest Review Score</option>
+            <option value="price">Price (low to high)</option>
+          </select>
+          <button class="btn btn-success" @click="getDestination()">Search Accommodations</button>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4 justify-content-center">
+      <div class="col-md-8">
+          <div class="text-center">
+            <div v-if="isLoading" class="loading-animation">
+            <div class="spinner"></div>
+          </div>
+          <table v-if="showTable" class="table table-hover table-success">
+            <thead>
+              <tr>
+                <th class="custom" colspan="2">Accomodation</th>
+                <th class="custom">Rating</th>
+                <th class="custom">Type</th>
+                <th class="custom">Review Score</th>
+                <th class="custom">Emissions</th>
+                <th class="custom">Book Now</th>  
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(hotel, index) in hotels" :key="index">
+                <td><img :src='hotel.main_photo_url'></td>
+                <td>{{ hotel.hotel_name }}</td>
+                <td>{{ getHotelStars(hotel.class)}}</td>
+                <td>{{ hotel.accommodation_type_name }}</td>
+                <td>{{ hotel.review_score }} ({{ hotel.review_score_word }})</td>
+                <td>{{ calculateHotelEmissions(hotel.room_qty, this.noNights) }} kg CO2e</td>
+                <td><a :href="hotel.url" target="_blank" class="btn btn-success btn-sm">Book Now</a></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
-  
+
 <script>
 import axios from "axios";
 
 export default {
-  // mounted() {
-  //   this.loadGoogleMaps(() => {
-  //     this.initMap();
-  //   });
-  // },
+  data() {
+    return {
+      checkIn: '',
+      checkOut: '',
+      adultNo: '',
+      roomNo: '',
+      orderSelect: 'popularity',
+      hotels: [],
+      hotelEmissions: '',
+      hotelID:'',
+      showTable: false,
+      isLoading: false,
+      noNights:'',
+      hotelEmissionResult:''
+    };
+  },
   methods: {
-    getPropertiesList(dest, dest_type, checkIn, checkOut, adultNo, roomNo, orderSelect) { //get properties/list
+    getDestination() {
+      this.isLoading = true
+      const checkInDate = new Date(this.checkIn);
+      const checkOutDate = new Date(this.checkOut);
+      const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
+      this.noNights = Math.round(
+        (checkOutDate - checkInDate) / oneDay
+      );
+      const url = 'https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete';
+
+      axios.get(url, {
+        headers: {
+          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
+        },
+        params: {
+          text: 'Bali',
+          languagecode: 'en-us'
+        }
+      })
+        .then(response => {
+          var stuff = response.data;
+          var dest = stuff[0].dest_id;
+          var searchType = stuff[0].dest_type;
+          this.getPropertiesList(dest, searchType, this.checkIn, this.checkOut, this.adultNo, this.roomNo, this.orderSelect);
+        })
+    },
+    getPropertiesList(dest, dest_type, checkIn, checkOut, adultNo, roomNo, orderSelect) {
       var hotelList = [];
       axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/list', {
         headers: {
-          'X-RapidAPI-Key': '7ec1836d98msha8273f8dc08549fp1d3979jsn0e2c99c4ef62',
+          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -51,244 +129,105 @@ export default {
         }
       })
         .then(response => {
-          hotelList = response.data.result
-          console.log(hotelList)
-          document.getElementById('table').innerHTML = '';
-          var heading1 = document.createElement('th');
-          heading1.textContent = 'Name';
-          var heading2 = document.createElement('th');
-          heading2.textContent = 'Rating';
-          var heading3 = document.createElement('th');
-          heading3.textContent = 'Type';
-          var heading4 = document.createElement('th');
-          heading4.textContent = 'Review Score';
-          var heading5 = document.createElement('th');
-          heading5.textContent = 'Link to Book';
-          var headerRow = document.createElement('tr');
-          headerRow.appendChild(heading1);
-          headerRow.appendChild(heading2);
-          headerRow.appendChild(heading3);
-          headerRow.appendChild(heading4);
-          headerRow.appendChild(heading5);
-          document.getElementById('table').appendChild(headerRow);
-          for (var i = 0; i < hotelList.length; i++) {
-            var hotelName = hotelList[i].hotel_name;
-            var hotelClass = hotelList[i].class;
-            var hotelLink = hotelList[i].url;
-            var hotelType = hotelList[i].accommodation_type_name;
-            var hotelScore = hotelList[i].review_score;
-            var hotelScoreWord = hotelList[i].review_score_word;
-            console.log(hotelName);
-            console.log(hotelClass);
-            var row = document.createElement('tr');
-            var name = document.createElement('td');
-            var star = document.createElement('td');
-            var link = document.createElement('td');
-            var type = document.createElement('td');
-            var score = document.createElement('td');
-            name.textContent = hotelName;
-            if (hotelClass == 0) {
-              star.textContent = '1 stars';
-            } else {
-              star.textContent = hotelClass + ' stars';
-            }
-            var linkElement = document.createElement('a');
-            linkElement.href = hotelLink;
-            linkElement.textContent = 'Book Now!';
-            linkElement.target = '_blank';
-            type.textContent = hotelType;
-            link.appendChild(linkElement);
-            score.textContent = hotelScore + ' (' + hotelScoreWord + ')'
-            row.appendChild(name);
-            row.appendChild(star);
-            row.appendChild(type);
-            row.appendChild(score);
-            row.appendChild(link);
-            document.getElementById('table').appendChild(row);
-          }
+          hotelList = response.data.result;
+          this.hotels = hotelList;
+          this.showTable = true
+          this.isLoading = false
+          console.log(hotelList) // Update the hotels data property
         })
     },
-    getDestination() { //get locations/autocomplete
-      const url = 'https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete';
-      var location = document.getElementById('text').value;
-      var checkIn = document.getElementById('checkIn').value;
-      var checkOut = document.getElementById('checkOut').value;
-      var adultNo = document.getElementById('adultNo').value;
-      var roomNo = document.getElementById('roomNo').value;
-      var orderSelect = document.getElementById('orderSelect').value;
-
-      axios.get(url, {
+    getHotelStars(star){
+      if(star == 0 || star == 1){
+        star = 2;
+      }
+      return star + ' stars'
+    },
+    async calculateHotelEmissions(){
+      const url = 'https://carbonsutra1.p.rapidapi.com/hotel_estimate';
+      const options = {
+        method: 'POST',
         headers: {
-          'X-RapidAPI-Key': '7ec1836d98msha8273f8dc08549fp1d3979jsn0e2c99c4ef62',
-          'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
+          'content-type': 'application/x-www-form-urlencoded',
+          Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
+          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
-        params: {
-          text: location,
-          languagecode: 'en-us'
-        }
-      })
-        .then(response => {
-          var stuff = response.data
-          var dest = stuff[0].dest_id;
-          var searchType = stuff[0].dest_type;
-          this.getPropertiesList(dest, searchType, checkIn, checkOut, adultNo, roomNo, orderSelect);
-        })
-    },
+        body: new URLSearchParams({
+          country_code: 'ID',
+          number_of_nights: 2,
+          number_of_rooms: 2,
+          city_name: "Bali",
+        }),
+      };
+
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        let obj = JSON.parse(result);
+        let carbonEmissions = obj.data.co2e_kg;
+        return carbonEmissions
+      } catch (error) {
+        console.error(error);
+        return 0
+      }
+    }
   },
 };
-
-// function getPropertiesList(dest, dest_type, checkIn, checkOut, adultNo, roomNo, orderSelect) { //get properties/list
-//   var hotelList = [];
-//   axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/list', {
-//     headers: {
-//       'X-RapidAPI-Key': '7ec1836d98msha8273f8dc08549fp1d3979jsn0e2c99c4ef62',
-//       'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
-//     },
-//     params: {
-//       offset: '0',
-//       arrival_date: checkIn,
-//       departure_date: checkOut,
-//       guest_qty: adultNo,
-//       dest_ids: dest,
-//       room_qty: roomNo,
-//       search_type: dest_type,
-//       order_by: orderSelect,
-//       languagecode: 'en-us',
-//       travel_purpose: 'leisure',
-//     }
-//   })
-//     .then(response => {
-//       hotelList = response.data.result
-//       console.log(hotelList)
-//       document.getElementById('table').innerHTML = '';
-//       var heading1 = document.createElement('th');
-//       heading1.textContent = 'Name';
-//       var heading2 = document.createElement('th');
-//       heading2.textContent = 'Rating';
-//       var heading3 = document.createElement('th');
-//       heading3.textContent = 'Type';
-//       var heading4 = document.createElement('th');
-//       heading4.textContent = 'Review Score';
-//       var heading5 = document.createElement('th');
-//       heading5.textContent = 'Link to Book';
-//       var headerRow = document.createElement('tr');
-//       headerRow.appendChild(heading1);
-//       headerRow.appendChild(heading2);
-//       headerRow.appendChild(heading3);
-//       headerRow.appendChild(heading4);
-//       headerRow.appendChild(heading5);
-//       document.getElementById('table').appendChild(headerRow);
-//       for (var i = 0; i < hotelList.length; i++) {
-//         var hotelName = hotelList[i].hotel_name;
-//         var hotelClass = hotelList[i].class;
-//         var hotelLink = hotelList[i].url;
-//         var hotelType = hotelList[i].accommodation_type_name;
-//         var hotelScore = hotelList[i].review_score;
-//         var hotelScoreWord = hotelList[i].review_score_word;
-//         console.log(hotelName);
-//         console.log(hotelClass);
-//         var row = document.createElement('tr');
-//         var name = document.createElement('td');
-//         var star = document.createElement('td');
-//         var link = document.createElement('td');
-//         var type = document.createElement('td');
-//         var score = document.createElement('td');
-//         name.textContent = hotelName;
-//         if (hotelClass == 0) {
-//           star.textContent = '1 stars';
-//         } else {
-//           star.textContent = hotelClass + ' stars';
-//         }
-//         var linkElement = document.createElement('a');
-//         linkElement.href = hotelLink;
-//         linkElement.textContent = 'Book Now!';
-//         linkElement.target = '_blank';
-//         type.textContent = hotelType;
-//         link.appendChild(linkElement);
-//         score.textContent = hotelScore + ' (' + hotelScoreWord + ')'
-//         row.appendChild(name);
-//         row.appendChild(star);
-//         row.appendChild(type);
-//         row.appendChild(score);
-//         row.appendChild(link);
-//         document.getElementById('table').appendChild(row);
-//       }
-//     })
-// }
-
-// function getDestination() { //get locations/autocomplete
-//   const url = 'https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete';
-//   var location = document.getElementById('text').value;
-//   var checkIn = document.getElementById('checkIn').value;
-//   var checkOut = document.getElementById('checkOut').value;
-//   var adultNo = document.getElementById('adultNo').value;
-//   var roomNo = document.getElementById('roomNo').value;
-//   var orderSelect = document.getElementById('orderSelect').value;
-
-//   axios.get(url, {
-//     headers: {
-//       'X-RapidAPI-Key': '7ec1836d98msha8273f8dc08549fp1d3979jsn0e2c99c4ef62',
-//       'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
-//     },
-//     params: {
-//       text: location,
-//       languagecode: 'en-us'
-//     }
-//   })
-//     .then(response => {
-//       var stuff = response.data
-//       var dest = stuff[0].dest_id;
-//       var searchType = stuff[0].dest_type;
-//       getPropertiesList(dest, searchType, checkIn, checkOut, adultNo, roomNo, orderSelect);
-//     })
-// }
-
-
-
-let btnclick = document.getElementById('searchButton'); //enter button to click
-document.addEventListener('keypress', (event) => {
-  let keyCode = event.keyCode ? event.keyCode : event.which;
-  if (keyCode === 13) {
-    btnclick.click();
-  }
-
-});
 </script>
-  
+
 <style scoped>
-#table {
-  text-align: center;
-}
-
-#searchButton {
-  margin: 0 auto;
-  display: block;
-}
-
-#orderSelect {
-  margin: 0 auto;
-  display: block;
-}
-
+/* Add your custom CSS styles here */
 #searchInput {
-  text-align: center;
-  margin-top: 150px;
+  margin-top: 20px;
 }
 
-input {
-  margin: 0 auto;
-  display: inline-flex;
+img {
+  width:100px
+}
+
+th {
+  background-color: #007BFF;
+  color: white;
 }
 
 tr {
-  background-color: lightgreen;
-  border: 1px solid black;
-  border-collapse: collapse;
+  background-color: #f5f5f5;
 }
 
-a:link {
-  background-color: transparent;
+tr:nth-child(even) {
+  background-color: #e3e3e3;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.custom{
+  background-color: green;
+}
+.loading-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #007BFF;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
-  
-  

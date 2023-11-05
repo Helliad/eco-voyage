@@ -245,11 +245,11 @@ export default {
 
 
 
-let btn = document.getElementById('searchButton'); //enter button to click
+let btnclick = document.getElementById('searchButton'); //enter button to click
 document.addEventListener('keypress', (event) => {
   let keyCode = event.keyCode ? event.keyCode : event.which;
   if (keyCode === 13) {
-    btn.click();
+    btnclick.click();
   }
 
 });

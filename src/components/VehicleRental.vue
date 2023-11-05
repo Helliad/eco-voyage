@@ -1,105 +1,118 @@
 <template>
-  <section class="pick-section">
-    <div class="container">
-      <div class="pick-container">
-        <div class="pick-container__title">
-          <h3 style="margin-bottom: -1.5rem">Vehicle Models</h3>
-          <h2 style="margin-bottom: -1.5rem">Rental Fleet</h2>
-          <p>
-            Choose from a variety of our eco-friendly vehicles to rent for your next
-            adventure in Bali
-          </p>
-        </div>
-
-
-        <div class="pick-container__car-content">
-          <!-- Pick car buttons -->
-          <div class="pick-box">
-            <button
-              :class="coloringButton('btn2')"
-              @click="changeCar('Toyota Avanza', 'btn2')"
-            >
-              Toyota Avanza
-            </button>
-            <button
-              :class="coloringButton('btn3')"
-              @click="changeCar('Toyota Kijang', 'btn3')"
-            >
-              Toyota Kijang Innova
-            </button>
-            <button
-              :class="coloringButton('btn4')"
-              @click="changeCar('Toyota Innova', 'btn4')"
-            >
-              Toyota Innova
-            </button>
-            <button
-              :class="coloringButton('btn5')"
-              @click="changeCar('Toyota Agya', 'btn5')"
-            >
-              Toyota Agya
-            </button>
+    <section class="pick-section">
+      <div class="container">
+        <div class="pick-container">
+          <div class="pick-container__title">
+            <h2 style="margin-bottom: 1rem">Bali's Rental Fleet</h2>
+            <p>
+              Choose from a variety of our eco-friendly vehicles to rent for your next
+              adventure in Bali
+            </p>
           </div>
 
-          <!-- CarBox content based on selected car -->
-          <div v-if="CAR_DATA[selectedCar]" class="box-cars">
-            <!-- Car -->
-            <div class="pick-car">
-              <div v-if="carLoad" class="loader"></div>
-              <img :src="require(`@/assets/${CAR_DATA[selectedCar].img}`)" alt="car_img" @load="setCarLoad(false)" />
-            </div>
-            <!-- Description -->
-            <div class="pick-description shadow">
-              <div class="pick-description__price">
-                <span>${{ CAR_DATA[selectedCar].price }}</span
-                ><p>/ DAY</p>
+          <div>
+            <CarRentalCalendar @update-dates="handleDateChange"/>
+          </div>
+          <div class="pick-container__car-content">
+            <!-- Pick car buttons -->
+            <div class = 'row'>
+              <div class="col-lg-3 pick-box">
+                <button
+                  :class="coloringButton('btn2')"
+                  @click="changeCar('Toyota Avanza', 'btn2')"
+                >
+                  Toyota Avanza
+                </button>
+                <button
+                  :class="coloringButton('btn3')"
+                  @click="changeCar('Toyota Kijang', 'btn3')"
+                >
+                  Toyota Kijang Innova
+                </button>
+                <button
+                  :class="coloringButton('btn4')"
+                  @click="changeCar('Toyota Innova', 'btn4')"
+                >
+                  Toyota Innova
+                </button>
+                <button
+                  :class="coloringButton('btn5')"
+                  @click="changeCar('Toyota Agya', 'btn5')"
+                >
+                  Toyota Agya
+                </button>
               </div>
-              <div class="pick-description__table">
-                <div class="pick-description__table__col">
-                  <span>Model</span>
-                  <span>{{ CAR_DATA[selectedCar].model }}</span>
+
+                <!-- CarBox content based on selected car -->
+                <!-- <div v-if="CAR_DATA[selectedCar]" class="box-cars"> -->
+
+                    <!-- Car -->
+              
+                <div class= "col-lg-9 pick-car">
+                  <div v-if="carLoad" class="loader"></div>
+                  <img :src="require(`@/assets/${CAR_DATA[selectedCar].img}`)" alt="car_img" @load="setCarLoad(false)" />
                 </div>
-                <div class="pick-description__table__col">
-                  <span>Mark</span>
-                  <span>{{ CAR_DATA[selectedCar].mark }}</span>
+              
+
+            </div>
+              <!-- Description -->
+              <div class = "row">
+              <div class = "box-cars">
+                <div class="col-lg-12 pick-description shadow">
+                  <div class="pick-description__price">
+                    <span>${{ CAR_DATA[selectedCar].price }}</span
+                    ><p>/ DAY</p>
+                  </div>
+                  <div class="pick-description__table">
+                    <div class="pick-description__table__col">
+                      <span>Model</span>
+                      <span>{{ CAR_DATA[selectedCar].model }}</span>
+                    </div>
+                    <div class="pick-description__table__col">
+                      <span>Mark</span>
+                      <span>{{ CAR_DATA[selectedCar].mark }}</span>
+                    </div>
+                    <div class="pick-description__table__col">
+                      <span>Year</span>
+                      <span>{{ CAR_DATA[selectedCar].year }}</span>
+                    </div>
+                    <div class="pick-description__table__col">
+                      <span>Doors</span>
+                      <span>{{ CAR_DATA[selectedCar].doors }}</span>
+                    </div>
+                    <div class="pick-description__table__col">
+                      <span>CO2 Emission</span>
+                      <span>{{ CAR_DATA[selectedCar].co2Emission }}</span>
+                    </div>
+                    <div class="pick-description__table__col">
+                      <span>Transmission</span>
+                      <span>{{ CAR_DATA[selectedCar].transmission }}</span>
+                    </div>
+                    <div class="pick-description__table__col">
+                      <span>Fuel</span>
+                      <span>{{ CAR_DATA[selectedCar].fuel }}</span>
+                    </div>
+                  </div>
+                  <!-- Button CTA -->
+                  <a class="cta-btn" :href="reserveNowUrl">Reserve Now</a>
                 </div>
-                <div class="pick-description__table__col">
-                  <span>Year</span>
-                  <span>{{ CAR_DATA[selectedCar].year }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Doors</span>
-                  <span>{{ CAR_DATA[selectedCar].doors }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>CO2 Emission</span>
-                  <span>{{ CAR_DATA[selectedCar].co2Emission }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Transmission</span>
-                  <span>{{ CAR_DATA[selectedCar].transmission }}</span>
-                </div>
-                <div class="pick-description__table__col">
-                  <span>Fuel</span>
-                  <span>{{ CAR_DATA[selectedCar].fuel }}</span>
                 </div>
               </div>
-              <!-- Button CTA -->
-              <a class="cta-btn" href="#booking-section">Reserve Now</a>
-            </div>
+              </div>
           </div>
         </div>
-      </div>
-    </div>
+  
   </section>
-  <CarCalculatorEmissions :co2Emission="computedCO2Emission" /> 
+  <CarCalculatorEmissions :co2Emission="computedCO2Emission" :carname="computedCarName" /> 
 </template>
 
 <script>
 import CarCalculatorEmissions from "./CarCalculatorEmissions.vue";
+import CarRentalCalendar from "./CarRentalCalendar.vue";
 export default {
   components: {
     CarCalculatorEmissions,
+    CarRentalCalendar,
   },
   data() {
     return {
@@ -107,12 +120,53 @@ export default {
       selectedScooter: "Scooter Model 1",
       carLoad: true,
       selectedTab: "car",
+      fromDay: '',
+      fromYear: '',
+      fromMonth: '',
+      toDay: '',
+      toMonth: '',
+      toYear: '',
     };
   },
   computed: {
+    reserveNowUrl() {
+      const baseUrl = 'https://cars.booking.com/search-results';
+      const queryParams = new URLSearchParams({
+        aid: '2311236',
+        coordinates: '',
+        cor: 'sg',
+        doDay: this.toDay,
+        doHour: '10',
+        doMinute: '0',
+        doMonth: this.toMonth,
+        doYear: this.toYear,
+        driversAge: '30',
+        dropCoordinates: '',
+        dropFtsType: 'C',
+        dropLocation: '11311',
+        dropLocationName: 'Bali',
+        ftsType: 'C',
+        label: 'en-row-booking-desktop-v0aqgtf3mjWbjFaAWHbxPAS652796017659:pl:ta:p1:p2:ac:ap:neg:fi:tikwd-65526620:lp9062526:li:dec:dm',
+        location: '11311',
+        locationName: 'Bali',
+        prefcurrency: 'SGD',
+        preflang: 'en',
+        puDay: this.fromDay,
+        puHour: '10',
+        puMinute: '0',
+        puMonth: this.fromMonth,
+        puYear: this.fromYear,
+        locationIata: '',
+        dropLocationIata: ''
+      });
+      return `${baseUrl}?${queryParams.toString()}`;
+    },
     computedCO2Emission() {
       // Compute the CO2 emission value based on CAR_DATA[selectedCar]
       return this.CAR_DATA[this.selectedCar].co2Emission;
+    },
+    computedCarName(){
+      return this.selectedCar;
     },
     CAR_DATA() {
       return {
@@ -168,6 +222,17 @@ export default {
     },
   },
   methods: {
+    handleDateChange({ fromYearMonthDay, toYearMonthDay }) {
+      // Here you can access `dates.fromDate` and `dates.toDate`
+      // You can set them to data properties if you wish to keep track
+      this.fromDay = fromYearMonthDay.day;
+      this.fromMonth = fromYearMonthDay.month;
+      this.fromYear = fromYearMonthDay.year;
+      this.toDay = toYearMonthDay.day;
+      this.toMonth = toYearMonthDay.month;
+      this.toYear = toYearMonthDay.year;
+      // console.log('Updated dates received:', this.fromDateDay, this.fromDateMonth);
+    },
     changeCar(carName, buttonID) {
       this.selectedCar = carName;
       this.colorBtn = buttonID;
@@ -193,7 +258,8 @@ export default {
 
 <style scoped>
 .pick-section {
-  padding: 5rem 0;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
   background: white;
 }
 
@@ -240,14 +306,16 @@ export default {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  align-items: center;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1400px) {
   .pick-container__car-content {
     flex-direction: column;
     gap: 5rem;
   }
 }
+
 
 .pick-box {
   display: flex;
@@ -262,7 +330,7 @@ export default {
   padding: 1rem 2rem;
   background-color: #e9e9e9;
   transition: all 0.2s;
-  text-align: left;
+  text-align: center;
 }
 
 .pick-box button:hover {
@@ -276,7 +344,7 @@ export default {
   position: relative;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 991px) {
   .pick-car {
     width: 100%;
   }
@@ -284,7 +352,7 @@ export default {
 
 .pick-car img {
   width: 100%;
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
 
 .pick-description {
@@ -296,7 +364,6 @@ export default {
 .pick-description__price {
   width: 100%;
   background-color: #42b983;
-  /* Replace with your desired background color */
   font-size: 1.8rem;
   display: flex;
   align-items: center;
@@ -409,7 +476,7 @@ export default {
   }
 }
 
-.tab {
+/* .tab {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -429,5 +496,5 @@ export default {
 .tab button.active {
   background-color: #42b983;
   color: white;
-}
+} */
 </style>

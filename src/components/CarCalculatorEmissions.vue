@@ -41,13 +41,13 @@
                 <p class="text-success">
                   {{ carname }} CO2 Emission:
                   <span class="text-success">
-                    <b>{{ avgEmi }}</b>
+                    <b>{{ caremissions }}</b>
                   </span>
                 </p>
                 <p class="text-danger">
                   Average Petrol Car:
                   <span class="text-danger">
-                    <b>{{ caremissions }}</b>
+                    <b>{{ avgEmi }}</b>
                   </span>
                 </p>
               </div>
@@ -245,12 +245,12 @@ export default {
       this.calculateDistance(async (travel) => {
       // Calculate emissions based on CO2 emission prop
       const caremissions = this.co2Emission * travel;
-      const avgEmi = 180 * travel;
+      const avgEmi = 192 * travel;
       let save = ((avgEmi - caremissions) / avgEmi) * 100;
       save = save.toFixed(2);
 
-      this.caremissions = caremissions;
-      this.avgEmi = avgEmi;
+      this.caremissions = caremissions.toFixed(2);
+      this.avgEmi = avgEmi.toFixed(2);
       this.save = save;
       });
     },

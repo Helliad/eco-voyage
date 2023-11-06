@@ -14,12 +14,12 @@
             <div class="row ">
               <div class="col-md-6 mb-4 text-start">
                 <label for="checkIn" class="form-label text-start fs-6">Check In date:</label>
-                <input type="date" id="checkIn" class="form-control" v-model="checkIn"
+                <input type="date" id="checkIn" class="form-control" v-model="checkIn"  :min="minCheckInDate"
                   placeholder="Select Check In date" />
               </div>
               <div class="col-md-6 mb-4 text-start">
                 <label for="checkOut" class="form-label text-start fs-6">Check Out date:</label>
-                <input type="date" id="checkOut" class="form-control" v-model="checkOut"
+                <input type="date" id="checkOut" class="form-control" v-model="checkOut" :min="checkIn" 
                   placeholder="Select Check Out date" />
               </div>
             </div>
@@ -41,7 +41,7 @@
           </form>
         </div>
       </div>
-      <div class="col-md-6 col-sm-1">
+      <div class="col-md-6 col-sm-12">
         <div class="mt-12 mt-lg-0 position-relative">
 
           <img src="..\..\src\assets\Accomodation.jpeg" alt="online course"
@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="row mt-4 justify-content-center">
-      <div class="col-md-8">
+      <div class="col-lg-8 col-md-12">
         <div class="text-center">
           <div v-if="isLoading" class="loading-animation">
             <div class="spinner"></div>
@@ -102,8 +102,14 @@ export default {
       showTable: false,
       isLoading: false,
       noNights: '',
-      hotelEmissionResult: ''
+      hotelEmissionResult: '',
+      minCheckInDate: ''
     };
+  },
+  mounted() {
+    const today = new Date();
+    today.setDate(today.getDate() + 1); // Set minimum checkIn date as tomorrow
+    this.minCheckInDate = today.toISOString().split('T')[0];
   },
   watch: {
     checkIn(newDate) {

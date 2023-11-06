@@ -1,6 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <span class="navbar-brand ps-4" >ECO-VOYAGE BALI</span>
+      <span class = "navbar-brand ps-4"><router-link class="nav-link" to="/">ECO-VOYAGE BALI</router-link></span>
+      <!-- <span class="navbar-brand ps-4" >ECO-VOYAGE BALI</span> -->
       <button class="navbar-toggler" type="button" @click="toggleNavbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>

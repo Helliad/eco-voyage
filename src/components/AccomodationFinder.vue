@@ -57,8 +57,8 @@
                 <th class="custom">Rating</th>
                 <th class="custom">Type</th>
                 <th class="custom">Review Score</th>
-                <!-- <th class="custome">Emissions</th> -->
-                <th class="custom">Book Now</th>
+                <th class="custom">Emissions</th>
+                <th class="custom">Book Now</th>  
               </tr>
             </thead>
             <tbody>
@@ -68,9 +68,9 @@
                 <td>{{ getHotelStars(hotel.class) }}</td>
                 <td>{{ hotel.accommodation_type_name }}</td>
                 <td>{{ hotel.review_score }} ({{ hotel.review_score_word }})</td>
+                <td>{{ calculateHotelEmissions(hotel.room_qty, this.noNights) }} kg CO2e</td>
                 <td><a :href="hotel.url" target="_blank" class="btn btn-success btn-sm">Book Now</a></td>
               </tr>
-
             </tbody>
           </table>
         </div>
@@ -91,14 +91,23 @@ export default {
       roomNo: '',
       orderSelect: 'popularity',
       hotels: [],
-      hotelID: '',
+      hotelEmissions: '',
+      hotelID:'',
       showTable: false,
       isLoading: false,
+      noNights:'',
+      hotelEmissionResult:''
     };
   },
   methods: {
     getDestination() {
       this.isLoading = true
+      const checkInDate = new Date(this.checkIn);
+      const checkOutDate = new Date(this.checkOut);
+      const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
+      this.noNights = Math.round(
+        (checkOutDate - checkInDate) / oneDay
+      );
       const url = 'https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete';
 
       axios.get(url, {
@@ -152,24 +161,38 @@ export default {
       }
       return star + ' stars'
     },
-    getPhotos(hotelID) {
-      axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/get-hotel-photos', {
+    async calculateHotelEmissions(){
+      const url = 'https://carbonsutra1.p.rapidapi.com/hotel_estimate';
+      const options = {
+        method: 'POST',
         headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+          Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
           'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
-          'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
+          'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
-        params: {
-          hotel_ids: hotelID,
-          languagecode: 'en-us'
-        },
-      })
-        .then(response => {
-          console.log(response.data)
-        })
+        body: new URLSearchParams({
+          country_code: 'ID',
+          number_of_nights: 2,
+          number_of_rooms: 2,
+          city_name: "Bali",
+        }),
+      };
+
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        let obj = JSON.parse(result);
+        let carbonEmissions = obj.data.co2e_kg;
+        return carbonEmissions
+      } catch (error) {
+        console.error(error);
+        return 0
+      }
     }
   },
 };
-
 </script>
 
 <style scoped>

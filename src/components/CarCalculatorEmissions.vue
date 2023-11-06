@@ -1,34 +1,25 @@
 <template>
-  <div id="emissions-calculator" class="container">
+  <div id="emissions-calculator" class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-lg-8 col-md-6">
+      <div class="col-lg"></div>
+      <div class="col-xs-12 col-lg-6 col-md-6">
         <div id="map"></div>
       </div>
-      <div class="col-xs-12 col-lg-4 col-md-6">
+      <div class="col-xs-12 col-lg-4 col-md-6 d-flex align-items-center justify-content-center">
         <div class="panel-container">
           <div id="location-form">
             <h3>Emissions Calculator</h3>
             <div class="form-input">
               <label for="fromLocation">From</label>
               <div class="input-container">
-                <input
-                  v-model="fromLocation"
-                  type="text"
-                  id="fromLocation"
-                  placeholder="Enter from location"
-                />
+                <input v-model="fromLocation" type="text" id="fromLocation" placeholder="Enter from location" />
                 <div class="search-icon"></div>
               </div>
             </div>
             <div class="form-input">
               <label for="toLocation">To</label>
               <div class="input-container">
-                <input
-                  v-model="toLocation"
-                  type="text"
-                  id="toLocation"
-                  placeholder="Enter to location"
-                />
+                <input v-model="toLocation" type="text" id="toLocation" placeholder="Enter to location" />
                 <div class="search-icon"></div>
               </div>
             </div>
@@ -42,29 +33,29 @@
             <div v-if="avgEmi || caremissions">
               <p class="co2-saved">
                 <span class="text-success" style="font-size: 48px">
-                {{ save }}</span
-                >% CO2 emissions saved
+                  {{ save }}</span>% CO2 emissions saved
               </p>
               <div class="divider"></div>
               <div class="details">
-                <h4>Details:</h4>
-                <p>
-                  Elecric Car CO2 Emission:
-                  <span class="text-success"
-                    ><b>{{ avgEmi }}</b></span
-                  >
+                <h4>Emissions:</h4>
+                <p class="text-success">
+                  {{ carname }} CO2 Emission:
+                  <span class="text-success">
+                    <b>{{ caremissions }}</b>
+                  </span>
                 </p>
-                <p>
-                  Petrol Car CO2 Emission:
-                  <span class="text-danger"
-                    ><b>{{ caremissions }}</b></span
-                  >
+                <p class="text-danger">
+                  Average Petrol Car:
+                  <span class="text-danger">
+                    <b>{{ avgEmi }}</b>
+                  </span>
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-lg"></div>
     </div>
   </div>
 </template>
@@ -72,7 +63,8 @@
 <script>
 export default {
   props: {
-  co2Emission: Number, // Define a prop to receive CO2 emission data
+  co2Emission: Number,
+  carname: String,
 },
   data() {
     return {
@@ -86,9 +78,9 @@ export default {
       toMarker: null,
       fromLocation: "",
       toLocation: "",
-      caremissions: null, // Initialize caremissions to null
-      avgEmi: null, // Initialize avgEmi to null
-      save: null, // Initialize save to null
+      caremissions: null,
+      avgEmi: null, 
+      save: null, 
     };
   },
   mounted() {
@@ -96,7 +88,6 @@ export default {
       this.initMap();
     });
   },
-  // AIzaSyAzhn8LHxt5g8hdqo6ITsvKI1NUKzYMNBg
   methods: {
     loadGoogleMaps(callback) {
       if (window.google) {
@@ -124,107 +115,84 @@ export default {
 
       this.fromAutocomplete = new window.google.maps.places.Autocomplete(
         document.getElementById("fromLocation"),
-        // {
-        //   componentRestrictions: { country: "ID" },
-        // }
+        {
+          componentRestrictions: { country: "ID" },
+        }
       );
+      
 
       this.toAutocomplete = new window.google.maps.places.Autocomplete(
         document.getElementById("toLocation"),
-        // {
-        //   componentRestrictions: { country: "ID" },
-        // }
+        {
+          componentRestrictions: { country: "ID" },
+        }
       );
 
-      this.fromMarker = new window.google.maps.Marker({
-        map: this.map,
-        label: "A",
-      });
-
-      this.toMarker = new window.google.maps.Marker({
-        map: this.map,
-        label: "B",
-      });
-
+      // FOR ADDING
       this.fromAutocomplete.addListener("place_changed", () => {
-        this.updateMap();
+        const place = this.fromAutocomplete.getPlace();
+        if (place.geometry) { 
+          this.fromLocation = place.formatted_address || place.name;
+          this.updateMap();
+        }
       });
 
       this.toAutocomplete.addListener("place_changed", () => {
-        this.updateMap();
+        const place = this.toAutocomplete.getPlace();
+        if (place.geometry) { 
+          this.toLocation = place.formatted_address || place.name;
+          this.updateMap();
+        }
       });
-
+      
+      // FOR REMOVING
       document.getElementById("fromLocation").addEventListener("input", () => {
-        if (document.getElementById("fromLocation").value === "") {
+        if (document.getElementById("fromLocation").value == "") {
           this.updateMap();
           this.directionsDisplay.set("directions", null);
-          // this.fromMarker.setMap(null);
         }
       });
 
       document.getElementById("toLocation").addEventListener("input", () => {
-        if (document.getElementById("toLocation").value === "") {
+        if (document.getElementById("toLocation").value == "") {
           this.updateMap();
           this.directionsDisplay.set("directions", null);
-          // this.toMarker.setMap(null);
         }
       });
     },
+
     clearForm() {
       this.fromLocation = "";
       this.toLocation = "";
       this.directionsDisplay.set("directions", null);
-
-      // Check if the "A" marker (fromMarker) exists and remove it
-      if (this.fromMarker) {
-        this.fromMarker.setMap(null);
-      }
-
-      // Check if the "B" marker (toMarker) exists and remove it
-      if (this.toMarker) {
-        this.toMarker.setMap(null);
-      }
-
-      this.fromMarker = null; // Set the marker instance to null
-      this.toMarker = null; // Set the marker instance to null
-
-      this.caremissions = "";
-      this.avgEmi = "";
-      this.save = "";
-
+      this.caremissions = null;
+      this.avgEmi = null;
+      this.save = null;
       this.map.setCenter({ lat: -8.409518, lng: 115.188916 });
       this.map.setZoom(9);
     },
     updateMap() {
-      const fromLocation = this.fromLocation;
-      const toLocation = this.toLocation;
+      let fromLocation = this.fromLocation;
+      let toLocation = this.toLocation;
 
       if (fromLocation && toLocation) {
         this.calculateDistance(() => {
           this.map.fitBounds(
             this.directionsDisplay.getDirections().routes[0].bounds
           );
-          this.fromMarker.setMap(null);
-          this.toMarker.setMap(null);
         });
       } else if (fromLocation) {
         this.geocodeAddress(fromLocation, (fromLatLng) => {
           this.map.setCenter(fromLatLng);
           this.map.setZoom(15);
-          this.fromMarker.setMap(this.map);
-          this.fromMarker.setPosition(fromLatLng);
         });
-        this.toMarker.setMap(null);
       } else if (toLocation) {
         this.geocodeAddress(toLocation, (toLatLng) => {
           this.map.setCenter(toLatLng);
           this.map.setZoom(15);
-          this.toMarker.setMap(this.map);
-          this.toMarker.setPosition(toLatLng);
         });
-        this.fromMarker.setMap(null);
       } else {  
-        this.clearForm
+        this.clearForm()
       }
     },
     calculateDistance(callback) {
@@ -277,13 +245,12 @@ export default {
       this.calculateDistance(async (travel) => {
       // Calculate emissions based on CO2 emission prop
       const caremissions = this.co2Emission * travel;
-      const avgEmi = 180 * travel;
+      const avgEmi = 192 * travel;
       let save = ((avgEmi - caremissions) / avgEmi) * 100;
       save = save.toFixed(2);
 
-      // Update the data properties with calculated values
-      this.caremissions = caremissions;
-      this.avgEmi = avgEmi;
+      this.caremissions = caremissions.toFixed(2);
+      this.avgEmi = avgEmi.toFixed(2);
       this.save = save;
       });
     },
@@ -292,13 +259,18 @@ export default {
 </script>
 
 <style>
+@media (max-width: 767px) {
+  .d-flex.align-items-center.justify-content-center {
+    padding-top: 2.5rem;
+  }
+}
 #map {
   height: 100%;
   min-height: 500px;
 }
 #emissions-calculator {
-  margin-top: 60px;
-  height: 90vh;
+  margin-top: 30px;
+  margin-bottom: 30px;
   padding: 16px;
 }
 
@@ -308,10 +280,9 @@ export default {
 }
 
 .panel-container {
-  width: 350px; /* Adjust the width to your preference */
-  margin-left: 20px; /* Add some spacing between the map and panel */
+  width: 350px;  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 24px 0;
+  padding: 12px 0;
 }
 
 .panel {

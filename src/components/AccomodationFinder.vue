@@ -1,36 +1,53 @@
 <template>
-        <div class="pick-container__title">
-          <h3 style="margin-top: 1rem;">Accomodations Finder</h3>
-          <h2>Find the perfect accommodations for your next adventure!</h2>
-          <p>
-            Search, compare, and book hotels that suit your travel needs       
-          </p>
-        </div>
+  <div class="pick-container__title">
+    <h2 style="margin-top: 1rem;">Accomodations Finder</h2>
+    <h4>Find the perfect accommodations for your next adventure!</h4>
+    <p>
+      Search, compare, and book hotels that suit your travel needs
+    </p>
+  </div>
   <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
+    <div class="row justify-content-center ">
+      <div class="col-md-6 ">
         <div id="searchInput" class="text-center">
-          <form @submit.prevent="getDestination">
-          <input type="text" class="form-control mb-2" v-model="checkIn" placeholder="Check In date" onfocusin="(this.type='date')" onfocusout="(this.type='text')"/>
-          <input type="text" class="form-control mb-2" v-model="checkOut" placeholder="Check Out date" onfocusin="(this.type='date')" onfocusout="(this.type='text')"/>
-          <input type="text" class="form-control mb-2" v-model="adultNo" placeholder="Number of adults" />
-          <input type="text" class="form-control mb-2" v-model="roomNo" placeholder="Number of rooms" />
-          <select class="form-select mb-2" v-model="orderSelect">
-            <option value="popularity">Popularity</option>
-            <option value="class_descending">Stars (5 to 2)</option>
-            <option value="class_ascending">Stars (2 to 5)</option>
-            <option value="review_score">Guest Review Score</option>
-            <option value="price">Price (low to high)</option>
-          </select>
-          <button class="btn btn-success" @click="getDestination">Search Accommodations</button>
+          <form @submit.prevent="getDestination" class="text-start">
+            <div class="row ">
+              <div class="col-md-6 mb-4 text-start">
+                <label for="checkIn" class="form-label text-start fs-6">Check In date:</label>
+                <input type="date" id="checkIn" class="form-control" v-model="checkIn" placeholder="Select Check In date"/>
+              </div>
+              <div class="col-md-6 mb-4 text-start">
+                <label for="checkOut" class="form-label text-start fs-6">Check Out date:</label>
+                <input type="date" id="checkOut" class="form-control" v-model="checkOut"
+                  placeholder="Select Check Out date"/>
+              </div>
+            </div>
+            <label for="adultNo" class="form-label text-start fs-6">Number of adults:</label>
+            <input type="number" id="adultNo" class="form-control mb-4" v-model="adultNo"
+              placeholder="Enter the number of adults" />
+            <label for="roomNo" class="form-label text-start fs-6">Number of rooms:</label>
+            <input type="text" id="roomNo" class="form-control mb-4" v-model="roomNo"
+              placeholder="Enter the number of rooms" />
+            <label for="orderSelect" class="form-label text-start fs-6">Sort by:</label>
+            <select id="orderSelect" class="form-select mb-4" v-model="orderSelect">
+              <option value="popularity">Popularity</option>
+              <option value="class_descending">Stars (5 to 2)</option>
+              <option value="class_ascending">Stars (2 to 5)</option>
+              <option value="review_score">Guest Review Score</option>
+              <option value="price">Price (low to high)</option>
+            </select>
+            <button class="btn btn-success" @click="getDestination">Search Accommodations</button>
           </form>
         </div>
+      </div>
+      <div class="col-md-6">
+        
       </div>
     </div>
     <div class="row mt-4 justify-content-center">
       <div class="col-md-8">
-          <div class="text-center">
-            <div v-if="isLoading" class="loading-animation">
+        <div class="text-center">
+          <div v-if="isLoading" class="loading-animation">
             <div class="spinner"></div>
           </div>
           <table v-if="showTable" class="table table-hover table-success">
@@ -41,14 +58,14 @@
                 <th class="custom">Type</th>
                 <th class="custom">Review Score</th>
                 <!-- <th class="custome">Emissions</th> -->
-                <th class="custom">Book Now</th>  
+                <th class="custom">Book Now</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(hotel, index) in hotels" :key="index">
                 <td><img :src='hotel.main_photo_url'></td>
                 <td>{{ hotel.hotel_name }}</td>
-                <td>{{ getHotelStars(hotel.class)}}</td>
+                <td>{{ getHotelStars(hotel.class) }}</td>
                 <td>{{ hotel.accommodation_type_name }}</td>
                 <td>{{ hotel.review_score }} ({{ hotel.review_score_word }})</td>
                 <td><a :href="hotel.url" target="_blank" class="btn btn-success btn-sm">Book Now</a></td>
@@ -56,10 +73,10 @@
 
             </tbody>
           </table>
-          </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -74,7 +91,7 @@ export default {
       roomNo: '',
       orderSelect: 'popularity',
       hotels: [],
-      hotelID:'',
+      hotelID: '',
       showTable: false,
       isLoading: false,
     };
@@ -129,26 +146,26 @@ export default {
           console.log(hotelList) // Update the hotels data property
         })
     },
-    getHotelStars(star){
-      if(star == 0 || star == 1){
+    getHotelStars(star) {
+      if (star == 0 || star == 1) {
         star = 2;
       }
       return star + ' stars'
     },
-    getPhotos(hotelID){
-      axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/get-hotel-photos',{
+    getPhotos(hotelID) {
+      axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/get-hotel-photos', {
         headers: {
           'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
-        hotel_ids: hotelID,
-        languagecode: 'en-us'
-      },
+          hotel_ids: hotelID,
+          languagecode: 'en-us'
+        },
       })
-      .then(response=>{
-        console.log(response.data)
-      })
+        .then(response => {
+          console.log(response.data)
+        })
     }
   },
 };
@@ -157,12 +174,18 @@ export default {
 
 <style scoped>
 /* Add your custom CSS styles here */
+
+label{
+  font-size: small !important;
+  margin-bottom: 0;
+}
+
 #searchInput {
   margin-top: 20px;
 }
 
 img {
-  width:100px
+  width: 100px
 }
 
 th {
@@ -186,9 +209,10 @@ a:hover {
   text-decoration: none;
 }
 
-.custom{
+.custom {
   background-color: green;
 }
+
 .loading-animation {
   display: flex;
   justify-content: center;
@@ -206,7 +230,11 @@ a:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}</style>

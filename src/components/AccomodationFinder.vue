@@ -46,10 +46,10 @@
               <tr v-for="(hotel, index) in hotels" :key="index">
                 <td><img :src='hotel.main_photo_url'></td>
                 <td>{{ hotel.hotel_name }}</td>
-                <td>{{ getHotelStars(hotel.class)}}</td>
+                <td>{{ hotel.stars}}</td>
                 <td>{{ hotel.accommodation_type_name }}</td>
                 <td>{{ hotel.review_score }} ({{ hotel.review_score_word }})</td>
-                <td>{{ calculateHotelEmissions(hotel.room_qty, this.noNights) }} kg CO2e</td>
+                <td>{{ hotel.emissions }} kg CO2e</td>
                 <td><a :href="hotel.url" target="_blank" class="btn btn-success btn-sm">Book Now</a></td>
               </tr>
             </tbody>
@@ -112,7 +112,7 @@ export default {
       var hotelList = [];
       axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/list', {
         headers: {
-          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Key': 'c6499acefemsh2f2a7a59a238802p182b7ajsn4dac56ccca3a',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -128,9 +128,19 @@ export default {
           travel_purpose: 'leisure',
         }
       })
-        .then(response => {
+        .then(async response => {
           hotelList = response.data.result;
-          this.hotels = hotelList;
+          this.hotels = [];
+          //Debug mode
+          // let tempHotelList=[]
+          // tempHotelList.push(hotelList[0]);
+          for (let i in hotelList){
+            let currentHotel = hotelList[i];
+            let stars = this.getHotelStars(hotelList[i].class);
+            currentHotel["stars"] = stars;
+            currentHotel["emissions"] = await this.calculateHotelEmissions(stars);
+            this.hotels.push(currentHotel);
+          }
           this.showTable = true
           this.isLoading = false
           console.log(hotelList) // Update the hotels data property
@@ -142,29 +152,30 @@ export default {
       }
       return star + ' stars'
     },
-    async calculateHotelEmissions(){
+    async calculateHotelEmissions(stars){
       const url = 'https://carbonsutra1.p.rapidapi.com/hotel_estimate';
       const options = {
         method: 'POST',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
-          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Key': 'c6499acefemsh2f2a7a59a238802p182b7ajsn4dac56ccca3a',
           'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
         body: new URLSearchParams({
           country_code: 'ID',
-          number_of_nights: 2,
-          number_of_rooms: 2,
+          number_of_nights: this.noNights,
+          number_of_rooms: this.roomNo,
           city_name: "Bali",
+          hotel_rating: stars,
         }),
       };
-
-
       try {
         const response = await fetch(url, options);
         const result = await response.text();
         let obj = JSON.parse(result);
+        console.log("response: ",obj);
+
         let carbonEmissions = obj.data.co2e_kg;
         return carbonEmissions
       } catch (error) {
@@ -177,7 +188,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add your custom CSS styles here */
 #searchInput {
   margin-top: 20px;
 }

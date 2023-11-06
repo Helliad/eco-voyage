@@ -8,18 +8,19 @@
   </div>
   <div class="container mt-5">
     <div class="row justify-content-center ">
-      <div class="col-md-6 ">
+      <div class="col-md-6 col-sm-12">
         <div id="searchInput" class="text-center">
           <form @submit.prevent="getDestination" class="text-start">
             <div class="row ">
               <div class="col-md-6 mb-4 text-start">
                 <label for="checkIn" class="form-label text-start fs-6">Check In date:</label>
-                <input type="date" id="checkIn" class="form-control" v-model="checkIn" placeholder="Select Check In date"/>
+                <input type="date" id="checkIn" class="form-control" v-model="checkIn"
+                  placeholder="Select Check In date" />
               </div>
               <div class="col-md-6 mb-4 text-start">
                 <label for="checkOut" class="form-label text-start fs-6">Check Out date:</label>
                 <input type="date" id="checkOut" class="form-control" v-model="checkOut"
-                  placeholder="Select Check Out date"/>
+                  placeholder="Select Check Out date" />
               </div>
             </div>
             <label for="adultNo" class="form-label text-start fs-6">Number of adults:</label>
@@ -40,8 +41,13 @@
           </form>
         </div>
       </div>
-      <div class="col-md-6">
-        
+      <div class="col-md-6 col-sm-1">
+        <div class="mt-12 mt-lg-0 position-relative">
+
+          <img src="..\..\src\assets\Accomodation.jpeg" alt="online course"
+            class="img-fluid rounded-4 w-100 z-1 position-relative">
+
+        </div>
       </div>
     </div>
     <div class="row mt-4 justify-content-center">
@@ -53,22 +59,22 @@
           <table v-if="showTable" class="table table-hover table-success">
             <thead>
               <tr>
-                <th class="custom" colspan="2">Accomodation</th>
+                <th class="custom" colspan="2" id="hotelTable">Accomodation</th>
                 <th class="custom">Rating</th>
                 <th class="custom">Type</th>
                 <th class="custom">Review Score</th>
                 <th class="custom">Emissions</th>
-                <th class="custom">Book Now</th>  
+                <th class="custom">Book Now</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(hotel, index) in hotels" :key="index">
                 <td><img :src='hotel.main_photo_url'></td>
                 <td>{{ hotel.hotel_name }}</td>
-                <td>{{ getHotelStars(hotel.class) }}</td>
+                <td>{{ hotel.stars }}</td>
                 <td>{{ hotel.accommodation_type_name }}</td>
                 <td>{{ hotel.review_score }} ({{ hotel.review_score_word }})</td>
-                <td>{{ calculateHotelEmissions(hotel.room_qty, this.noNights) }} kg CO2e</td>
+                <td>{{ hotel.emissions }} kg CO2e</td>
                 <td><a :href="hotel.url" target="_blank" class="btn btn-success btn-sm">Book Now</a></td>
               </tr>
             </tbody>
@@ -92,12 +98,24 @@ export default {
       orderSelect: 'popularity',
       hotels: [],
       hotelEmissions: '',
-      hotelID:'',
+      hotelID: '',
       showTable: false,
       isLoading: false,
-      noNights:'',
-      hotelEmissionResult:''
+      noNights: '',
+      hotelEmissionResult: ''
     };
+  },
+  watch: {
+    checkIn(newDate) {
+      if (newDate && this.checkOut && newDate > this.checkOut) {
+        this.checkOut = '';
+      }
+    },
+    checkOut(newDate) {
+      if (newDate && this.checkIn && newDate < this.checkIn) {
+        this.checkIn = '';
+      }
+    }
   },
   methods: {
     getDestination() {
@@ -131,7 +149,7 @@ export default {
       var hotelList = [];
       axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/list', {
         headers: {
-          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Key': 'c6499acefemsh2f2a7a59a238802p182b7ajsn4dac56ccca3a',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -147,9 +165,19 @@ export default {
           travel_purpose: 'leisure',
         }
       })
-        .then(response => {
+        .then(async response => {
           hotelList = response.data.result;
-          this.hotels = hotelList;
+          this.hotels = [];
+          //Debug mode
+          // let tempHotelList=[]
+          // tempHotelList.push(hotelList[0]);
+          for (let i in hotelList) {
+            let currentHotel = hotelList[i];
+            let stars = this.getHotelStars(hotelList[i].class);
+            currentHotel["stars"] = stars;
+            currentHotel["emissions"] = await this.calculateHotelEmissions(stars);
+            this.hotels.push(currentHotel);
+          }
           this.showTable = true
           this.isLoading = false
           console.log(hotelList) // Update the hotels data property
@@ -161,29 +189,30 @@ export default {
       }
       return star + ' stars'
     },
-    async calculateHotelEmissions(){
+    async calculateHotelEmissions(stars) {
       const url = 'https://carbonsutra1.p.rapidapi.com/hotel_estimate';
       const options = {
         method: 'POST',
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
-          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Key': 'c6499acefemsh2f2a7a59a238802p182b7ajsn4dac56ccca3a',
           'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
         body: new URLSearchParams({
           country_code: 'ID',
-          number_of_nights: 2,
-          number_of_rooms: 2,
+          number_of_nights: this.noNights,
+          number_of_rooms: this.roomNo,
           city_name: "Bali",
+          hotel_rating: stars,
         }),
       };
-
-
       try {
         const response = await fetch(url, options);
         const result = await response.text();
         let obj = JSON.parse(result);
+        console.log("response: ", obj);
+
         let carbonEmissions = obj.data.co2e_kg;
         return carbonEmissions
       } catch (error) {
@@ -196,13 +225,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add your custom CSS styles here */
-
-label{
-  font-size: small !important;
-  margin-bottom: 0;
-}
-
 #searchInput {
   margin-top: 20px;
 }
@@ -260,4 +282,5 @@ a:hover {
   100% {
     transform: rotate(360deg);
   }
-}</style>
+}
+</style>

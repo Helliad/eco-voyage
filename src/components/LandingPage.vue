@@ -8,7 +8,7 @@
                                     class="text-success">Sustainably</span></u></h1>
                         <p class="lead mb-4">Bali's booming tourism industry has negatively impacted the environment, from carbon footprints to plastic waste, and learn how you can plan your trip sustainably.
                         </p>
-                        <a href="#" class="btn btn-success btn mb-4">See Some Sustainable Itineraries</a>
+                        <a href="/location" class="btn btn-success btn mb-4">See Some Sustainable Itineraries</a>
                     </div>
                 </div>
                 <div class="col-xxl-5 offset-xxl-1 col-xl-6 col-lg-6 col-12 d-lg-flex justify-content-end">

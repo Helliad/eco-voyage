@@ -61,10 +61,16 @@ const villagerImg = new Image()
 villagerImg.src = './img/villager/Idle.png'
 
 const oldManImg = new Image()
-oldManImg.src = './img/oldMan/newIdle.png'
+oldManImg.src = './img/oldMan/Idle.png'
 
-const oldWomanImg = new Image()
-oldWomanImg.src = './img/oldWoman/Idle.png'
+const blueyImg = new Image()
+blueyImg.src = './img/kid/bluehair.png'
+
+const pinkyImg = new Image()
+pinkyImg.src = './img/kid/pinkhair.png'
+
+const brownyImg = new Image()
+brownyImg.src = './img/kid/brownHair.png'
 
 charactersMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
@@ -87,21 +93,57 @@ charactersMap.forEach((row, i) => {
         })
       )
     }
-    // 1044 === oldWoman
-    else if (symbol === 1044) {
+    // 1078 === blueHair
+    else if (symbol === 1078) {
       characters.push(
         new Character({
           position: {
             x: j * Boundary.width + offset.x,
             y: i * Boundary.height + offset.y
           },
-          image: oldWomanImg,
+          image: blueyImg,
           frames: {
             max: 3,
             hold: 60
           },
           scale: 3,
-          dialogue: ['Hello, there! Are you enjoying your time in Bali, Jason?', 'Oh, yes! Bali is stunning, and Ive had the best time exploring the island. I cant get enough of its beauty', ' Im glad to hear that, Jason. Bali is a paradise indeed. But, have you ever thought about the impact your travel choices might have on the environment and the local community here?','Well, Ive heard about sustainable travel, but Im not quite sure what it means', 'Sustainable travel is all about being a responsible tourist. Its about making choices that help protect the environment and support the well-being of the local community. Let me tell you why booking a sustainable trip in Bali is so important.', 'But how can I make a difference as a tourist?.','There are a few simple things you can do. First, choose accommodations that are committed to sustainability. Look for eco-friendly resorts or guesthouses that minimize their impact on the environment', "Oh what impacts are there?", "A study by the International Tourism Partnership found that the hotel industry produces 16 million tons of food waste each year.", "Oh yes I shall use Eco-Voyage's Accomodation Finder to help me see which hotels are sustainable", "Great! See you around Jason"]
+          dialogue: ['Hey, there my name is Jason!', 'Oh, hi Jason, Im Bluey, what can I do for you?', ' I would like to know what can I do to travel sustainably here in Bali?','Well, many places here in Bali still use a lot of single-use plastics. Its quite concerning', 'Oh yes, they can have a devastating impact on the environment. The beautiful beaches and marine life we cherish will be threatened by plastic pollution.', 'We can all take steps to reduce our use of single-use plastics. One of the simplest things you can do is carry a reusable water bottle. You can fill it up at your accommodation or in restaurants that offer water refills','That sounds like a practical solution. Ive also noticed plastic straws everywhere. Can I do something about that?', "Absolutely, Jason. You can ask for your drinks without plastic straws or carry your own reusable straw. Many establishments are starting to offer paper or bamboo alternatives, which are much more environmentally friendly.", "That's a good idea. I'll make a point to say NO to plastic straws from now on. It's great to see that there are alternatives.", "It's a step in the right direction, Jason. The more we refuse single-use plastics and support businesses that are eco-conscious, the closer we get to a cleaner and more sustainable Bali.", "Thank you for sharing your knowledge! Hopefully Ill see you around!"]
+        })
+      )
+    }
+    // 1089 === pinkHair
+    else if (symbol === 1089) {
+      characters.push(
+        new Character({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y
+          },
+          image: pinkyImg,
+          frames: {
+            max: 3,
+            hold: 60
+          },
+          scale: 3,
+          dialogue: ['Pinky, Im really interested in experiencing Balis local culture. How can I make the most of it during my trip?', 'Jason, thats wonderful to hear! Embracing and supporting our local culture is a fantastic way to make the most of your visit. First, try to engage with the Balinese traditions. Attend local ceremonies or rituals; youll find them rich in history and spirituality.', ' That sounds fascinating. Id love to be a part of those experiences. Are there specific events or festivals I should look out for?','Absolutely! Keep an eye out for festivals like Galungan and Nyepi, which are celebrated with vibrant processions and beautiful decorations. Its a great opportunity to connect with the local community and understand our customs.', 'Ill make sure to check the calendar for those festivals. How can I support local artisans and businesses?', 'When shopping for souvenirs, try to buy from local artisans and markets. Youll find unique handcrafted items and help the local economy. Also, dining at small, family-owned warungs (local eateries) is a great way to enjoy authentic Balinese cuisine and support local businesses.',"Thank you so much pinky! Ill take them all into consideration", "Great! See you around Jason"]
+        })
+      )
+    }
+    // 1090 === brownHair
+    else if (symbol === 1090) {
+      characters.push(
+        new Character({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y
+          },
+          image: brownyImg,
+          frames: {
+            max: 3,
+            hold: 60
+          },
+          scale: 3,
+          dialogue: ['Sukarno, Im interested in exploring Bali while being conscious of the environment. Are there any eco-friendly transportation options available here?','Absolutely, Jason! Bali has embraced the idea of eco-vehicles to reduce carbon emissions and preserve our beautiful island. One popular choice is electric scooters, which are not only fun to ride but also produce much lesser emissions.', 'Thats great to hear. Electric scooters sound like a fun and eco-friendly way to get around. Are they readily available for tourists?','Yes, you can easily rent electric scooters in many tourist areas. Theyre affordable and a convenient mode of transportation for short trips, allowing you to explore the island with a smaller carbon footprint.', "That's fantastic. I also noticed bicycles around. Are they a sustainable option for tourists?", " Yes, bicycles are another excellent choice. They're a healthy and eco-friendly way to explore Bali at your own pace. Many rental shops offer a variety of bicycles, including traditional ones and electric bikes.", " It's wonderful to see these initiatives in place. I'll definitely consider electric scooters or bicycles for my travels in Bali. It's a small step towards preserving this paradise.","That's a thoughtful choice, Jason. By opting for eco-vehicles, you not only reduce your environmental impact but also contribute to a cleaner and more sustainable Bali."]
         })
       )
     }

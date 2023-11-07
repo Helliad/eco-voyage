@@ -5,14 +5,14 @@ const monsters = {
       y: 325
     },
     image: {
-      src: './img/embySprite.png'
+      src: './img/electric.png'
     },
     frames: {
-      max: 4,
+      max: 2,
       hold: 30
     },
     animate: true,
-    name: 'Emby',
+    name: 'Electric Car',
     attacks: [attacks.Tackle, attacks.Fireball]
   },
   Draggle: {
@@ -21,15 +21,15 @@ const monsters = {
       y: 100
     },
     image: {
-      src: './img/draggleSprite.png'
+      src: './img/hummer.png'
     },
     frames: {
-      max: 4,
+      max: 2,
       hold: 30
     },
     animate: true,
     isEnemy: true,
-    name: 'Draggle',
+    name: 'Gas Hummer',
     attacks: [attacks.Tackle, attacks.Fireball]
   }
 }

@@ -119,9 +119,9 @@ button {
 
 <script>
 window.embeddedChatbotConfig = {
-chatbotId: "tA1Gw0QmyQZG4_7Hxn7U4",
+chatbotId: "GDegXyRMaPX4ji3irS7AX",
 domain: "www.chatbase.co"
-};
+}
 
 export default {
 mounted() {

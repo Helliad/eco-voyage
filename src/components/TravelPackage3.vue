@@ -95,17 +95,17 @@
                 </div>
             </div>
             <div class='col-4'>
-                <ReviewTravel />
+                <ReviewTravel3 />
             </div>
         </div>
     </div>
 </template>
   
 <script>
-import ReviewTravel from "./ReviewTravel.vue";
+import ReviewTravel3 from "./ReviewTravel3.vue";
 export default {
     components: {
-        ReviewTravel,
+        ReviewTravel3,
     },
     data() {
         return {

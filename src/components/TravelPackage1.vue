@@ -120,17 +120,17 @@
         </div>
       </div>
       <div class='col-4'>
-        <ReviewTravel />
+        <ReviewTravel2 />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ReviewTravel from "./ReviewTravel.vue";
+import ReviewTravel2 from "./ReviewTravel2.vue";
 export default {
   components: {
-    ReviewTravel,
+    ReviewTravel2,
   },
   data() {
     return {

@@ -80,12 +80,12 @@
             reviews: [],
             displayedReviews: [],
             name: '',
-            selectedPackage: 'Sanur Adventure',
+            selectedPackage: 'Ubud Adventure',
             rating: '&#9733;&#9733;&#9733;&#9733;&#9733;',
             feedback: '',
             currentPage: 1,
             reviewsPerPage: 3,
-            whichPackage: 'Sanur Adventure',
+            whichPackage: 'Ubud Adventure',
         };
     },
     computed: {

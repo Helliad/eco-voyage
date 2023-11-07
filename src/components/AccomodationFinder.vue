@@ -57,11 +57,36 @@
           <table v-if="showTable" class="table table-hover table-success">
             <thead>
               <tr>
-                <th class="custom" colspan="2" id="hotelTable">Accomodation</th>
-                <th class="custom">Rating</th>
-                <th class="custom">Type</th>
-                <th class="custom">Review Score</th>
-                <th class="custom">Emissions</th>
+                <th class="custom" colspan="2" id="hotelTable">Accomodation
+                </th>
+                <th class="custom sortable-header" @click="sortTable('stars')">Rating
+                  <span v-if="sortBy === 'stars'">
+                    <span v-if="sortDirection == 'asc'">&#9650;</span>
+                    <span v-else-if="sortDirection == 'desc'">&#9660;</span>
+                  </span>
+                  <span v-else>&#9650;&#9660;</span> <!-- Double-sided arrow icon -->
+                </th>
+                <!-- <th class="custom">Review Score
+                </th> -->
+                <th class="custom">Type
+                </th>
+                <th class="custom sortable-header" @click="sortTable('review_score')">Review Score
+                  <span v-if="sortBy === 'review_score'">
+                    <span v-if="sortDirection == 'asc'">&#9650;</span>
+                    <span v-else-if="sortDirection == 'desc'">&#9660;</span>
+                  </span>
+                  <span v-else>&#9650;&#9660;</span> <!-- Double-sided arrow icon -->
+                </th>
+                <!-- <th class="custom">Review Score
+                </th> -->
+                <th class="custom sortable-header" @click="sortTable('emissions')">Emissions
+                  <span v-if="sortBy === 'emissions'">
+                    <span v-if="sortDirection == 'asc'">&#9650;</span>
+                    <span v-else-if="sortDirection == 'desc'">&#9660;</span>
+                  <!-- <i v-if="sortBy == 'emissions'" class="fas fa-sort-{{sortDirection === 'asc' ? 'up' : 'down'}}"></i> -->
+                  </span>
+                  <span v-else>&#9650;&#9660;</span> <!-- Double-sided arrow icon -->
+                </th>
                 <th class="custom">Book Now</th>
               </tr>
             </thead>
@@ -101,7 +126,9 @@ export default {
       isLoading: false,
       noNights: '',
       hotelEmissionResult: '',
-      minCheckInDate: ''
+      minCheckInDate: '',
+      sortDirection: 'asc',
+      sortBy: null
     };
   },
   mounted() {
@@ -134,7 +161,7 @@ export default {
 
       axios.get(url, {
         headers: {
-          'X-RapidAPI-Key': '7ddd3afe10mshc3bdc43a7b6bd25p1e7e95jsnfa1bbbe76ff3',
+          'X-RapidAPI-Key': 'ec30787aecmsha7e44713edd7b72p1739d0jsn0344ed976c69',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -154,7 +181,7 @@ export default {
       var hotelList = [];
       axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/list', {
         headers: {
-          'X-RapidAPI-Key': '7ddd3afe10mshc3bdc43a7b6bd25p1e7e95jsnfa1bbbe76ff3',
+          'X-RapidAPI-Key': 'ec30787aecmsha7e44713edd7b72p1739d0jsn0344ed976c69',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -174,12 +201,11 @@ export default {
           hotelList = response.data.result;
           this.hotels = [];
           //Debug mode
-          // let tempHotelList=[]
-          // tempHotelList.push(hotelList[0]);
-          // tempHotelList.push(hotelList[1]);
+          let tempHotelList=[]
+          tempHotelList.push(hotelList[0]);
+          tempHotelList.push(hotelList[1]);
           // tempHotelList.push(hotelList[2]);
-
-          for (let i in hotelList) {
+          for (let i in tempHotelList) {
             let currentHotel = hotelList[i];
             let stars = this.getHotelStars(hotelList[i].class);
             currentHotel["stars"] = stars;
@@ -204,7 +230,7 @@ export default {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
-          'X-RapidAPI-Key': '7ddd3afe10mshc3bdc43a7b6bd25p1e7e95jsnfa1bbbe76ff3',
+          'X-RapidAPI-Key': 'ec30787aecmsha7e44713edd7b72p1739d0jsn0344ed976c69',
           'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
         body: new URLSearchParams({
@@ -227,8 +253,30 @@ export default {
         console.error(error);
         return 0
       }
+    },
+    sortTable(column) {
+      // If a different column is clicked, set the sorting column and direction
+      if (column !== this.sortBy) {
+        this.sortBy = column;
+        this.sortDirection = "asc";
+      } 
+      else {
+        // If the same column is clicked, toggle the sorting direction
+        this.sortDirection = this.sortDirection == "asc" ? "desc" : "asc";
+      }
+
+      // Sort the hotels based on the selected column and direction
+      this.hotels.sort((a, b) => {
+        const aValue = a[column];
+        const bValue = b[column];
+        if (this.sortDirection == "asc") {
+          return aValue < bValue ? -1 : 1;
+        } else {
+          return aValue > bValue ? -1 : 1;
+        }
+      });
     }
-  },
+},
 };
 </script>
 
@@ -281,6 +329,13 @@ a:hover {
   height: 30px;
   animation: spin 2s linear infinite;
 }
+th.sortable-header span {
+  margin-left: 4px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Add some styles to the double-sided arrow to make it more prominent */
 
 @keyframes spin {
   0% {

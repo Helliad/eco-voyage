@@ -10,7 +10,6 @@
     <div class="row justify-content-center ">
       <div class="col-md-6 col-sm-12">
         <div id="searchInput" class="text-center">
-          <form @submit.prevent="getDestination" class="text-start">
             <div class="row ">
               <div class="col-md-6 mb-4 text-start">
                 <label for="checkIn" class="form-label text-start fs-6">Check In date:</label>
@@ -38,7 +37,6 @@
               <option value="price">Price (low to high)</option>
             </select>
             <button class="btn btn-success" @click="getDestination">Search Accommodations</button>
-          </form>
         </div>
       </div>
       <div class="col-md-6 col-sm-12">
@@ -53,7 +51,7 @@
     <div class="row mt-4 justify-content-center">
       <div class="col-lg-8 col-md-12">
         <div class="text-center">
-          <div v-if="isLoading" class="loading-animation">
+          <div class="loading-animation" v-if="isLoading">
             <div class="spinner"></div>
           </div>
           <table v-if="showTable" class="table table-hover table-success">
@@ -149,6 +147,7 @@ export default {
           var dest = stuff[0].dest_id;
           var searchType = stuff[0].dest_type;
           this.getPropertiesList(dest, searchType, this.checkIn, this.checkOut, this.adultNo, this.roomNo, this.orderSelect);
+          console.log('hi')
         })
     },
     getPropertiesList(dest, dest_type, checkIn, checkOut, adultNo, roomNo, orderSelect) {
@@ -177,6 +176,9 @@ export default {
           //Debug mode
           // let tempHotelList=[]
           // tempHotelList.push(hotelList[0]);
+          // tempHotelList.push(hotelList[1]);
+          // tempHotelList.push(hotelList[2]);
+
           for (let i in hotelList) {
             let currentHotel = hotelList[i];
             let stars = this.getHotelStars(hotelList[i].class);
@@ -186,7 +188,7 @@ export default {
           }
           this.showTable = true
           this.isLoading = false
-          console.log(hotelList) // Update the hotels data property
+          console.log('hi') // Update the hotels data property
         })
     },
     getHotelStars(star) {

@@ -53,7 +53,7 @@ export default {
                 {
                     title: "Explore Sanur",
                     description: "Ride around Sanur Village and explore it's local market and turtle sanctuary. Afterwards refresh yourself with a cheese-tasting session!",
-                    imageUrl: "ubug.png",
+                    imageUrl: "sanuroutside.png",
                     packageurl: "/TravelPackage2"
                 },
                 {
@@ -65,7 +65,7 @@ export default {
                 {
                     title: "Jatiluwih Rice Terraces",
                     description: "Catch a glimpse of the 2nd rarest bird in the world and explore Bali's UNESCO site!",
-                    imageUrl: "Package3.png",
+                    imageUrl: "ubug.png",
                     packageurl: "/TravelPackage3"
                 }
                 // Add more travelPackage objects as needed

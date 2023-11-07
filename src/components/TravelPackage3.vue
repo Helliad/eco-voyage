@@ -3,7 +3,7 @@
         <div class="row">
             <div class='col-8'>
                 <div class="travel-package">
-                    <img src="../assets/sanur.png" alt="Travel Package Image" class="travel-package-image"
+                    <img src="../assets/riceterrace.png" alt="Travel Package Image" class="travel-package-image"
                         style="max-width: 400px;">
                     <div class="travel-package-details">
                         <h1 class="display-3 fw-bold mb-3"><u class="text-warning">

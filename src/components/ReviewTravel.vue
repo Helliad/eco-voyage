@@ -1,8 +1,7 @@
 <template>
     <div class="container">
-        <h1>Package</h1>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12">
                 <div class="feedback-form-box">
                     <h2 class="feedback-form-title">Leave Feedback</h2>
                     <form @submit.prevent="writeUserData">
@@ -39,7 +38,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12">
                 <label for="packageSelect">Select Package:</label>
                 <select id="packageSelect" v-model="whichPackage">
                     <option value="All">All</option>

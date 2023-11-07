@@ -1,7 +1,7 @@
 <template>
     <h2> Sustainable Itinerary Planner</h2>
     <div class="card-group col-md-9 col-sm-12 mx-auto" id="card-deck">
-        <a class="card m-2" id="card1" href="#">
+        <a class="card m-2" id="card1" href="/accoms">
             <img src="../assets/QuickLinks/hotel.png" class="card-img-top" alt="hotels">
             <div class="card-body">
                 <h5 class="card-title">Accomodations</h5>

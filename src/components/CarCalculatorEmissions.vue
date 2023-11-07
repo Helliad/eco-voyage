@@ -24,7 +24,7 @@
               </div>
             </div>
 
-            <button class="btn btn-primary" @click="CarEmissions">
+            <button class="btn btn-success" @click="CarEmissions">
               Calculate Emissions
             </button>
             <button class="btn btn-outlined-secondary" @click="clearForm">

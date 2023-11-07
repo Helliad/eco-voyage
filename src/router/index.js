@@ -7,11 +7,17 @@ import CalculatorView from '../views/CalculatorView.vue'
 import RentalView from '../views/RentalView.vue'
 import LocationView from '../views/LocationView.vue'
 import AccomodationView from '../views/AccomodationView.vue'
+import TravelPackage1 from '../views/TravelPackageView1.vue'
 
 const routes = [{
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/TravelPackage1',
+    name: 'TravelPackage1',
+    component: TravelPackage1
   },
   {
     path: '/calculator',

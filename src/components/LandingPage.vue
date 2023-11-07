@@ -24,7 +24,7 @@
     </section>
 </template>
 
-<style>
+<style scoped>
 section{
     margin:20px 0;
 }

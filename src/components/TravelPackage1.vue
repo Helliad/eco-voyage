@@ -1,22 +1,23 @@
 <template>
-  <div class="container pagedesign">
+  <div class="container my-5">
     <div class="row">
       <div class='col-8'>
         <div class="travel-package">
-          <img src="https://via.placeholder.com/400" alt="Travel Package Image" class="travel-package-image">
+          <img src="../assets/inpackage1.png" alt="Travel Package Image" class="travel-package-image"
+            style="max-width: 400px;">
           <div class="travel-package-details">
-            <h1 class="travel-package-title">{{ packageName }}</h1>
+            <h1 class="display-3 fw-bold mb-3"><u class="text-warning">
+                <p class="text-success">{{ packageName }}</p>
+              </u></h1>
             <p class="travel-package-description">{{ packageDescription }}</p>
           </div>
         </div>
         <div class="activities">
-          <h2>Activities</h2>
-          <div class="activity">
-            <h1>{{ activity1Name }}</h1>
+          <div class="activity shadow">
+            <h1 style="padding-bottom: 10px;"><b>{{ activity1Name }}</b></h1>
             <div class="activity-description">
-              <p>Time: 7.30PM - 2.00PM</p>
-              <p><strong>Only cooking school with its own organic farm - so you truly have farm-to-table cooking!</strong>
-              </p>
+              <p style="text-align: center;"><b class = 'timedes shadow'>Time: 7.30AM - 2.00PM</b></p>
+              <p>Only cooking school with its own organic farm - so you truly have farm-to-table cooking!</p>
               <p>Visit to the local farmers market where you can learn about local produce (for morning session)</p>
               <p>Great for families!</p>
               <p>Bali Farm Cooking School offers a truly special and immersive experience for those looking to learn about
@@ -30,10 +31,22 @@
                 cooking skills and appreciate the natural resources that nourish our bodies.</p>
             </div>
             <div>
-              <button @click="showModal1 = true" class="btn btn-success">Regular Menu</button>
-              <button @click="showModal2 = true" class="btn btn-success">Vegan Menu</button><br>
-              <a href="https://www.seeksophie.com/experiences/bali-farm-tour-and-cooking-class-morning-session-o14jnmn85q"
-                class="btn btn-success">Reserve Now!</a>
+              <div style="padding-bottom: 10px;">
+                <span><b>Find out more about the menus you will be cooking!</b></span>
+              </div>
+              <div class="row" style="padding-bottom: 20px;">
+                <div class="col"></div>
+                <div class="col"><button @click="showModal1 = true" class="btn btn-success shadow"><b>Regular
+                      Menu</b></button></div>
+                <div class="col-1"></div>
+                <div class="col"><button @click="showModal2 = true" class="btn btn-success shadow"><b>Vegan
+                      Menu</b></button><br></div>
+                <div class="col"></div>
+              </div>
+              <div class = "reserve">
+                <a href="https://www.seeksophie.com/experiences/bali-farm-tour-and-cooking-class-morning-session-o14jnmn85q"
+                  class="custom-btn shadow"><b>Make Your Reservation Now!</b></a>
+              </div>
 
               <!-- Modal -->
               <div v-if="showModal1" class="modal">
@@ -62,18 +75,53 @@
               </div>
             </div>
           </div>
-          <div class="activity">
-            <h3>{{ activity2Name }}</h3>
-            <!-- Add content for Activity 2 here if needed -->
+          <div class="activity shadow">
+            <h1 style="padding-bottom: 10px;"><b>{{ activity2Name }}</b></h1>
+            <div class="activity-description">
+              <p style="text-align: center;"><b class = 'timedes shadow'>Time: 5.00PM - 8.30PM</b></p>
+              <p>Experience the mesmerizing activities of fireflies at night.</p>
+              <p>Learn why fireflies are crucial for the environment and biodiversity.</p>
+              <p>Support the preservation of fireflies and their natural habitat.</p>
+              <p>Fireflies are fascinating creatures that have captivated the imaginations of people for centuries. This
+                safari offers a unique opportunity to witness the mesmerizing activities of fireflies and learn more about
+                their behavior and habitat.</p>
+
+              <h3>Why is Firefly Conservation Important?</h3>
+              <p>Fireflies are magical creatures that light up the night sky. They are a joy to see, and their presence is
+                a
+                sign of a healthy ecosystem. However, fireflies are declining in many parts of the world, including Bali.
+              </p>
+              <p>There are many reasons why fireflies are disappearing:</p>
+              <ul>
+                <li>Habitat loss: Fireflies need clean air, non-contaminated water, and fertile soil to survive. When
+                  their
+                  habitats are destroyed, they cannot live there anymore.</li>
+                <li>Light pollution: Fireflies use light to communicate with each other, and when there is too much
+                  artificial light, they cannot see each other. This can lead to problems with mating and reproduction.
+                </li>
+                <li>Pesticides: Pesticides can kill fireflies directly, or they can make it difficult for them to find
+                  food.
+                </li>
+              </ul>
+              <p>The decline of fireflies is a serious problem. Fireflies are important pollinators, and they help to
+                control insect pests. They also play a role in the food chain. Without fireflies, our ecosystems would be
+                less healthy.</p>
+
+              <p>By joining this activity, you'll not only experience the magic of these creatures but also support their
+                conservation in the village. Your participation directly contributes to their protection and a sustainable
+                environment.</p>
+                
+            </div>
+            <div class = "reserve">
+                <a href="https://www.seeksophie.com/experiences/bali-fireflies-night-safari-with-the-local-conservationist-oxp5w10vzr"
+                  class="custom-btn shadow"><b>Make Your Reservation Now!</b></a>
+              </div>
           </div>
-        </div>
-        <div class="last-updated">
-          Last updated: {{ lastUpdated }}
         </div>
       </div>
       <div class='col-4'>
-          <ReviewTravel />
-        </div>
+        <ReviewTravel />
+      </div>
     </div>
   </div>
 </template>
@@ -88,27 +136,42 @@ export default {
     return {
       showModal1: false,
       showModal2: false,
-      review: "",
-      packageName: 'Travel Package 1',
-      packageDescription: 'This is a sample travel package description.',
-      activity1Name: 'Farm-to-Table Balinese Cooking | With Visit to Local Market',
-      activity2Name: 'Activity 2',
-      lastUpdated: '3 days ago',
+      packageName: 'Ubud Adventure',
+      packageDescription: 'Experience traditional cuisine in an organic farm, perfect for families. Withness magical fireflies, and cherish the night.',
+      activity1Name: 'Farm-to-Table Balinese Cooking',
+      activity2Name: 'Fireflies Safari with Local Conservationist',
     };
-  },
-  methods: {
-    submitReview() {
-      // Handle the review submission, e.g., send to an API or log to the console
-      console.log(this.review);
-      this.review = ""; // Reset the textarea
-      this.showModal = false; // Close the modal
-    }
   },
 
 };
 </script>
 
 <style scoped>
+.timedes {
+  font-size: larger;
+  background-color: white;
+  padding: 7px;
+}
+.reserve {
+  margin-bottom: 10px;
+  background-color: whitesmoke;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.custom-btn {
+  background-color: #4CAF50;
+  color: white;
+  margin: 20px;
+  padding: 10px 20px;
+  border: none;
+  /* border-radius: 5px; */
+  cursor: pointer;
+}
+
+.custom-btn:hover {
+  background-color: #45a049;
+}
+
 .modal {
   display: block;
   /* Hidden by default */
@@ -169,11 +232,6 @@ export default {
   margin-right: 20px;
 }
 
-.travel-package-title {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
 .travel-package-description {
   font-size: 16px;
 }
@@ -184,8 +242,9 @@ export default {
 
 .activity {
   border: 1px solid #e1e1e1;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 20px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
 }
 
 .activity h3 {
@@ -193,16 +252,6 @@ export default {
   margin-bottom: 5px;
 }
 
-.last-updated {
-  text-align: right;
-  font-size: 14px;
-}
-
 .activity-description {
   text-align: left;
-}
-.pagedesign {
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-</style>
+}</style>

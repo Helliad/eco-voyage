@@ -136,7 +136,7 @@ export default {
 
       axios.get(url, {
         headers: {
-          'X-RapidAPI-Key': '92fdebb2a2mshc4244c6bda5b0cfp16b5cejsneee1d6ef82d1',
+          'X-RapidAPI-Key': '7ddd3afe10mshc3bdc43a7b6bd25p1e7e95jsnfa1bbbe76ff3',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -155,7 +155,7 @@ export default {
       var hotelList = [];
       axios.get('https://apidojo-booking-v1.p.rapidapi.com/properties/list', {
         headers: {
-          'X-RapidAPI-Key': 'c6499acefemsh2f2a7a59a238802p182b7ajsn4dac56ccca3a',
+          'X-RapidAPI-Key': '7ddd3afe10mshc3bdc43a7b6bd25p1e7e95jsnfa1bbbe76ff3',
           'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
         },
         params: {
@@ -202,7 +202,7 @@ export default {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
-          'X-RapidAPI-Key': 'c6499acefemsh2f2a7a59a238802p182b7ajsn4dac56ccca3a',
+          'X-RapidAPI-Key': '7ddd3afe10mshc3bdc43a7b6bd25p1e7e95jsnfa1bbbe76ff3',
           'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
         body: new URLSearchParams({

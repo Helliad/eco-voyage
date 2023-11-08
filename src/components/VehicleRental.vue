@@ -3,7 +3,7 @@
     <div class="container">
       <div class="pick-container">
         <div class="pick-container__title">
-          <h2 style="margin-bottom: 1rem">Bali's Rental Fleet</h2>
+          <h2 style="margin-bottom: 1rem"><b>Bali's Rental Fleet</b></h2>
           <p>
             Choose from a variety of our eco-friendly vehicles to rent for your next
             adventure in Bali

@@ -80,12 +80,12 @@
             reviews: [],
             displayedReviews: [],
             name: '',
-            selectedPackage: 'Sanur Adventure',
+            selectedPackage: 'Jatiluwih Rice Terraces',
             rating: '&#9733;&#9733;&#9733;&#9733;&#9733;',
             feedback: '',
             currentPage: 1,
             reviewsPerPage: 3,
-            whichPackage: 'Sanur Adventure',
+            whichPackage: 'Jatiluwih Rice Terraces',
         };
     },
     computed: {

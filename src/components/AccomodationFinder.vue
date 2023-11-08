@@ -191,11 +191,11 @@ export default {
           hotelList = response.data.result;
           this.hotels = [];
           //Debug mode
-          let tempHotelList=[]
-          tempHotelList.push(hotelList[0]);
-          tempHotelList.push(hotelList[1]);
+          // let tempHotelList=[]
+          // tempHotelList.push(hotelList[0]);
+          // tempHotelList.push(hotelList[1]);
           // tempHotelList.push(hotelList[2]);
-          for (let i in tempHotelList) {
+          for (let i in hotelList) {
             let currentHotel = hotelList[i];
             let stars = this.getHotelStars(hotelList[i].class);
             currentHotel["stars"] = stars;

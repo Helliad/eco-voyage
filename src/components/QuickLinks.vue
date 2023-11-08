@@ -19,10 +19,10 @@
                 <h5 class="card-title">Eco-Vehicles</h5>
             </div>
         </a>
-        <a class="card m-2" id="card4" href="#">
+        <a class="card m-2" id="card4" href="/Offsetcarbon">
             <img src="../assets/QuickLinks/flights.png" class="card-img-top" alt="flights">
             <div class="card-body">
-                <h5 class="card-title">Choose a flight</h5>
+                <h5 class="card-title">Carbon Offset</h5>
             </div>
         </a>
     </div>

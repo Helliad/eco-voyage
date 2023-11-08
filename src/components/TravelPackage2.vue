@@ -107,7 +107,7 @@ export default {
             packageName: 'Sanur Adventure',
             packageDescription: "Ride around Sanur Village and explore it's local market and turtle sanctuary. Afterwards refresh yourself with a cheese-tasting session!",
             activity1Name: 'Sanur Village E-Bike Tour | Local Market, Turtle Sanctuary',
-            activity2Name: 'Fireflies Safari with Local Conservationist',
+            activity2Name: 'Cheese Tasting and Pairing | Sanur',
         };
     },
 

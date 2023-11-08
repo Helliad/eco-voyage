@@ -9,9 +9,12 @@
     <div class="container">
       <div class="card" v-for="(activity, index) in activities" :key="index">
         <a :href="activity.url" target="_blank">
-          <img :src="activity.image" :alt="activity.title"/>
+          <div class="card-image" :style="{ backgroundImage: 'url(' + activity.image + ')' }"></div>
           <div class="card-content">
             <h2 class="card-title">{{ activity.title }}</h2>
+            <div class="card-icon">
+              <img :src="activity.image" :alt="activity.title"/>
+            </div>
           </div>
         </a>
       </div>
@@ -89,23 +92,39 @@
   <style scoped>
     .container {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
     }
     .card {
-      width: calc(40%);
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin: 5px;
+      
+      background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 0 0 calc(45%); /* 2 cards per row with 20px gap */
+    width: 100%; /* Adjust the width as needed */
+  height: auto;/* Allow the card to adjust its height based on content */
+  display: flex;
+    flex-direction: column;
+
     }
-    .card img {
+    .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .card-icon img {
+    width: 400px;
+    height: 100%;
+  }
+    image {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+    height: 100%;
+    background-size: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    flex: 0 0 calc(33%); /* 2 cards per row with 20px gap */
     }
     .card-content {
       padding: 10px;
@@ -117,6 +136,8 @@
     a:link {
   text-decoration: none;
 }
+
+
   </style>
   
   

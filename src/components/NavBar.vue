@@ -11,7 +11,7 @@
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
-          <a class="nav-link" @click="openHTMLPage">Emissions Calculator</a>
+          <a class="nav-link" @click="openHTMLPage">Bali Game</a>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
           <router-link class="nav-link" to="/rental">Rental View</router-link>

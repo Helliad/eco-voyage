@@ -228,8 +228,8 @@ export default {
     font-size: 18px;
     margin-bottom: 5px;
 }
-
 .activity-description {
     text-align: left;
-}</style>
-  
+}
+</style>
+    

@@ -43,7 +43,7 @@ export default {
 };
 </script>
   
-<style>
+<style scoped>
 .navbar-brand {
   font-weight: bold;
   font-size: 1.5rem;

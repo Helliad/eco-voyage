@@ -1,7 +1,7 @@
 <template>
     <h2>Travel Packages</h2>
-    <div class="travelpackage row row-cols-1 row-cols-md-5 g-3">
-        <div class="col-1"></div>
+    <div class="travelpackage row row-cols-1 row-cols-md-3 g-3">
+        <!-- <div class="col-1"></div> -->
         <div class="col" v-for="(travelPackage, index) in travelPackages" :key="index">
             <div class="card h-100" @mouseenter="hoveredPackage = index" @mouseleave="hoveredPackage = null"
                 :class="{ 'hovered': hoveredPackage === index }">
@@ -15,13 +15,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-1"></div>
+        <!-- <div class="col-1"></div> -->
     </div>
 </template>
   
-<style>
+<style scoped>
 .travelpackage {
     margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 .card {
@@ -30,17 +31,22 @@
 
 .card.hovered {
     transform: scale(1.05);
-    /* Increase the card size on hover */
 }
 
 .card-footer {
     display: none;
-    /* Hide the card footer by default */
 }
 
 .card.hovered .card-footer {
     display: block;
-    /* Show the card footer when hovered */
+}
+
+.card-body .card-text {
+    display: none;
+}
+
+.card.hovered .card-text {
+    display: block;
 }
 </style>
   
@@ -48,7 +54,7 @@
 export default {
     data() {
         return {
-            hoveredPackage: null, // Initialize to null when no package is hovered
+            hoveredPackage: null,
             travelPackages: [
                 {
                     title: "Explore Sanur",
@@ -68,7 +74,6 @@ export default {
                     imageUrl: "ubug.png",
                     packageurl: "/TravelPackage3"
                 }
-                // Add more travelPackage objects as needed
             ]
         };
     }

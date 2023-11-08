@@ -3,7 +3,6 @@
   <LandingPage />
   <QuickLinks/>
   <TravelPackages/>
-  <TravelReview/>
   <FooterBar/>
 </template>
 

@@ -164,7 +164,7 @@ export default {
           var dest = stuff[0].dest_id;
           var searchType = stuff[0].dest_type;
           this.getPropertiesList(dest, searchType, this.checkIn, this.checkOut, this.adultNo, this.roomNo, this.orderSelect);
-          console.log('hi')
+          // console.log('hi')
         })
     },
     getPropertiesList(dest, dest_type, checkIn, checkOut, adultNo, roomNo, orderSelect) {
@@ -204,7 +204,7 @@ export default {
           }
           this.showTable = true
           this.isLoading = false
-          console.log('hi') // Update the hotels data property
+          // console.log('hi') // Update the hotels data property
         })
     },
     getHotelStars(star) {
@@ -235,7 +235,7 @@ export default {
         const response = await fetch(url, options);
         const result = await response.text();
         let obj = JSON.parse(result);
-        console.log("response: ", obj);
+        // console.log("response: ", obj);
 
         let carbonEmissions = obj.data.co2e_kg;
         return carbonEmissions

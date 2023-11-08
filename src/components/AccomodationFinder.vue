@@ -59,23 +59,13 @@
               <tr>
                 <th class="custom" colspan="2" id="hotelTable">Accomodation
                 </th>
-                <th class="custom sortable-header" @click="sortTable('stars')">Rating
-                  <span v-if="sortBy === 'stars'">
-                    <span v-if="sortDirection == 'asc'">&#9650;</span>
-                    <span v-else-if="sortDirection == 'desc'">&#9660;</span>
-                  </span>
-                  <span v-else>&#9650;&#9660;</span> <!-- Double-sided arrow icon -->
+                <th class="custom sortable-header">Rating
                 </th>
                 <!-- <th class="custom">Review Score
                 </th> -->
                 <th class="custom">Type
                 </th>
-                <th class="custom sortable-header" @click="sortTable('review_score')">Review Score
-                  <span v-if="sortBy === 'review_score'">
-                    <span v-if="sortDirection == 'asc'">&#9650;</span>
-                    <span v-else-if="sortDirection == 'desc'">&#9660;</span>
-                  </span>
-                  <span v-else>&#9650;&#9660;</span> <!-- Double-sided arrow icon -->
+                <th class="custom sortable-header">Review Score
                 </th>
                 <!-- <th class="custom">Review Score
                 </th> -->

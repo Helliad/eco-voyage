@@ -9,7 +9,7 @@
     </footer>
 </template>
 
-<style>
+<style scoped>
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;

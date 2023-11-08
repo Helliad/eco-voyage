@@ -13,11 +13,12 @@ import NavBar from '@/components/NavBar.vue'
 import QuickLinks from '@/components/QuickLinks.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import TravelPackages from '@/components/TravelPackages.vue'
+import TravelReview from '@/components/TravelReview.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    LandingPage, NavBar, FooterBar, QuickLinks, TravelPackages
+    LandingPage, NavBar, FooterBar, QuickLinks, TravelReview, TravelPackages
 }
 }
 </script>

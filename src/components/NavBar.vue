@@ -11,7 +11,7 @@
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
-          <a class="nav-link" @click="openHTMLPage">PixelBali</a>
+          <a class="nav-link" @click="openHTMLPage" id="baliGame">Bali Game</a>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
           <router-link class="nav-link" to="/rental">Eco-Vehicles</router-link>
@@ -51,6 +51,10 @@ export default {
 
 .navbar-nav .nav-link {
   font-size: 1.2rem;
+}
+
+#baliGame:hover{
+  cursor: pointer;
 }
 
 .navbar {

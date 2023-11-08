@@ -10,11 +10,17 @@ import AccomodationView from '../views/AccomodationView.vue'
 import TravelPackage1 from '../views/TravelPackageView1.vue'
 import TravelPackage2 from '../views/TravelPackageView2.vue'
 import TravelPackage3 from '../views/TravelPackageView3.vue'
+import OffsetView from '../views/OffsetView.vue'
 
 const routes = [{
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/OffsetCarbon',
+    name: 'OffsetView',
+    component: OffsetView
   },
   {
     path: '/TravelPackage1',

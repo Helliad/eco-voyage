@@ -22,6 +22,7 @@
 <style scoped>
 .travelpackage {
     margin-top: 15px;
+    margin-bottom: 30px;
 }
 
 .card {

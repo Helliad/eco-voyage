@@ -218,8 +218,9 @@ export default {
           this.hotels = [];
           for (let i in hotelList) {
             let currentHotel = hotelList[i];
-            let stars = this.getHotelStars(hotelList[i].class);
-            currentHotel["stars"] = stars;
+            let displaystars = this.getHotelStars(hotelList[i].class);
+            let stars = this.getAPIHotelStars(hotelList[i].class);
+            currentHotel["stars"] = displaystars;
             currentHotel["emissions"] = await this.calculateHotelEmissions(stars);
             this.hotels.push(currentHotel);
           }
@@ -227,11 +228,17 @@ export default {
           this.isLoading = false
         })
     },
+    getAPIHotelStars(star) {
+      if (star == 0 || star == 1) {
+        star = 2;
+      }
+      return star + ' stars';
+    },
     getHotelStars(stars) {
       if (stars >= 2 && stars <= 5) {
-        return '★'.repeat(stars); // ★ is the "&#9733;" symbol
+        return '★'.repeat(stars);
       } else {
-        return '★'.repeat(2); // Return an empty string for invalid star ratings
+        return '★'.repeat(2); 
       }
     },
     async calculateHotelEmissions(stars) {
@@ -256,7 +263,7 @@ export default {
         const response = await fetch(url, options);
         const result = await response.text();
         let obj = JSON.parse(result);
-        // console.log("response: ", obj);
+
 
         let carbonEmissions = obj.data.co2e_kg;
         return carbonEmissions
@@ -266,17 +273,15 @@ export default {
       }
     },
     sortTable(column) {
-      // If a different column is clicked, set the sorting column and direction
       if (column !== this.sortBy) {
         this.sortBy = column;
         this.sortDirection = "asc";
       }
       else {
-        // If the same column is clicked, toggle the sorting direction
+        
         this.sortDirection = this.sortDirection == "asc" ? "desc" : "asc";
       }
 
-      // Sort the hotels based on the selected column and direction
       this.hotels.sort((a, b) => {
         const aValue = a[column];
         const bValue = b[column];

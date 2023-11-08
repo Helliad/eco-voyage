@@ -60,7 +60,7 @@ export default {
                 { id: 1, offsets: 1, price: 11.34, link: 'https://buy.stripe.com/test_bIY03A6qlcUv800eUU' },
                 { id: 2, offsets: 2, price: 22.20, link: 'https://buy.stripe.com/test_7sIeYu9Cx1bN2FGeUV' },
                 { id: 3, offsets: 3, price: 33.40, link: 'https://buy.stripe.com/test_eVa7w22a53jVcgg002' },
-                { id: 4, offsets: 1, price: 99.9, link: 'https://buy.stripe.com/test_00g9Ea5mh9IjcggeUX' },
+                { id: 4, offsets: 10, price: 99.9, link: 'https://buy.stripe.com/test_00g9Ea5mh9IjcggeUX' },
             ],
             selectedCardId: null,
         };

@@ -1,42 +1,54 @@
 <template>
-  <div class="pick-container__title">
-    <h2 style="margin-top: 1rem;">Accomodations Finder</h2>
-    <h4>Find the perfect accommodations for your next adventure!</h4>
-    <p>
-      Search, compare, and book hotels that suit your travel needs
-    </p>
+  <div class="pick-container">
+    <div class="pick-container__title">
+      <h2 style="margin-top: 1rem;"><b>Accomodations Finder</b></h2>
+      <h4>Find the perfect accommodations for your next adventure!</h4>
+      <p>
+        Search, compare, and book hotels that suit your travel needs
+      </p>
+    </div>
   </div>
   <div class="container mt-5">
     <div class="row justify-content-center ">
       <div class="col-md-6 col-sm-12">
         <div id="searchInput" class="text-center">
-            <div class="row ">
-              <div class="col-md-6 mb-4 text-start">
-                <label for="checkIn" class="form-label text-start fs-6">Check In date:</label>
-                <input type="date" id="checkIn" class="form-control" v-model="checkIn"  :min="minCheckInDate"
-                  placeholder="Select Check In date" />
-              </div>
-              <div class="col-md-6 mb-4 text-start">
-                <label for="checkOut" class="form-label text-start fs-6">Check Out date:</label>
-                <input type="date" id="checkOut" class="form-control" v-model="checkOut" :min="checkIn" 
-                  placeholder="Select Check Out date" />
-              </div>
+          <div class="row ">
+            <div class="col-md-6 mb-4 text-start">
+              <label for="checkIn" class="form-label text-start fs-6"><b>Check In date:</b></label>
+              <input type="date" id="checkIn" class="form-control" v-model="checkIn" :min="minCheckInDate"
+                placeholder="Select Check In date" />
+              <div v-if="!checkInValid" class="text-danger">*Please select a Check In date.</div>
             </div>
-            <label for="adultNo" class="form-label text-start fs-6">Number of adults:</label>
-            <input type="number" id="adultNo" class="form-control mb-4" v-model="adultNo"
+            <div class="col-md-6 mb-4 text-start">
+              <label for="checkOut" class="form-label text-start fs-6"><b>Check Out date:</b></label>
+              <input type="date" id="checkOut" class="form-control" v-model="checkOut" :min="checkIn"
+                placeholder="Select Check Out date" />
+              <div v-if="!checkOutValid" class="text-danger">*Please select a Check Out date.</div>
+            </div>
+          </div>
+          <div class='text-start mb-4'>
+            <label for="adultNo" class="form-label text-start fs-6"><b>Number of adults:</b></label>
+            <input type="number" id="adultNo" class="form-control" v-model="adultNo"
               placeholder="Enter the number of adults" />
-            <label for="roomNo" class="form-label text-start fs-6">Number of rooms:</label>
-            <input type="text" id="roomNo" class="form-control mb-4" v-model="roomNo"
+            <div v-if="!adultNoValid" class="text-danger">*Please enter the number of people.</div>
+          </div>
+          <div class='text-start mb-4'>
+            <label for="roomNo" class="form-label text-start fs-6"><b>Number of rooms:</b></label>
+            <input type="text" id="roomNo" class="form-control" v-model="roomNo"
               placeholder="Enter the number of rooms" />
-            <label for="orderSelect" class="form-label text-start fs-6">Sort by:</label>
-            <select id="orderSelect" class="form-select mb-4" v-model="orderSelect">
-              <option value="popularity">Popularity</option>
-              <option value="class_descending">Stars (5 to 2)</option>
-              <option value="class_ascending">Stars (2 to 5)</option>
-              <option value="review_score">Guest Review Score</option>
-              <option value="price">Price (low to high)</option>
-            </select>
-            <button class="btn btn-success" @click="getDestination">Search Accommodations</button>
+            <div v-if="!roomNoValid" class="text-danger">*Please enter the number of rooms.</div>
+          </div>
+          <div class='text-start'>
+            <label for="orderSelect" class="form-label text-start fs-6"><b>Sort by:</b></label>
+          </div>
+          <select id="orderSelect" class="form-select mb-4" v-model="orderSelect">
+            <option value="popularity">Popularity</option>
+            <option value="class_descending">Stars (5 to 2)</option>
+            <option value="class_ascending">Stars (2 to 5)</option>
+            <option value="review_score">Guest Review Score</option>
+            <option value="price">Price (low to high)</option>
+          </select>
+          <button class="btn btn-success" @click="checkFormValidity"><b>Search Accommodations</b></button>
         </div>
       </div>
       <div class="col-md-6 col-sm-12">
@@ -54,28 +66,24 @@
           <div class="loading-animation" v-if="isLoading">
             <div class="spinner"></div>
           </div>
-          <table v-if="showTable" class="table table-hover table-success">
+          <table v-if="showTable" class="table table-hover justify-content-center">
             <thead>
               <tr>
                 <th class="custom" colspan="2" id="hotelTable">Accomodation
                 </th>
                 <th class="custom sortable-header">Rating
                 </th>
-                <!-- <th class="custom">Review Score
-                </th> -->
                 <th class="custom">Type
                 </th>
                 <th class="custom sortable-header">Review Score
                 </th>
-                <!-- <th class="custom">Review Score
-                </th> -->
+
                 <th class="custom sortable-header" @click="sortTable('emissions')">Emissions
                   <span v-if="sortBy === 'emissions'">
                     <span v-if="sortDirection == 'asc'">&#9650;</span>
                     <span v-else-if="sortDirection == 'desc'">&#9660;</span>
-                  <!-- <i v-if="sortBy == 'emissions'" class="fas fa-sort-{{sortDirection === 'asc' ? 'up' : 'down'}}"></i> -->
                   </span>
-                  <span v-else>&#9650;&#9660;</span> <!-- Double-sided arrow icon -->
+                  <span v-else>&#9650;&#9660;</span>
                 </th>
                 <th class="custom">Book Now</th>
               </tr>
@@ -109,6 +117,10 @@ export default {
       adultNo: '',
       roomNo: '',
       orderSelect: 'popularity',
+      checkInValid: true,
+      checkOutValid: true,
+      adultNoValid: true,
+      roomNoValid: true,
       hotels: [],
       hotelEmissions: '',
       hotelID: '',
@@ -139,6 +151,20 @@ export default {
     }
   },
   methods: {
+    checkFormValidity() {
+      this.checkInValid = !!this.checkIn;
+      this.checkOutValid = !!this.checkOut;
+      this.adultNoValid = !!this.adultNo;
+      this.roomNoValid = !!this.roomNo;
+
+      // Check if all required fields are filled
+      if (this.checkInValid && this.checkOutValid && this.adultNoValid && this.roomNoValid) {
+        this.formIsValid = true;
+        this.getDestination(); // Proceed with the search
+      } else {
+        this.formIsValid = false;
+      }
+    },
     getDestination() {
       this.isLoading = true
       const checkInDate = new Date(this.checkIn);
@@ -190,11 +216,6 @@ export default {
         .then(async response => {
           hotelList = response.data.result;
           this.hotels = [];
-          //Debug mode
-          // let tempHotelList=[]
-          // tempHotelList.push(hotelList[0]);
-          // tempHotelList.push(hotelList[1]);
-          // tempHotelList.push(hotelList[2]);
           for (let i in hotelList) {
             let currentHotel = hotelList[i];
             let stars = this.getHotelStars(hotelList[i].class);
@@ -204,14 +225,14 @@ export default {
           }
           this.showTable = true
           this.isLoading = false
-          // console.log('hi') // Update the hotels data property
         })
     },
-    getHotelStars(star) {
-      if (star == 0 || star == 1) {
-        star = 2;
+    getHotelStars(stars) {
+      if (stars >= 2 && stars <= 5) {
+        return '★'.repeat(stars); // ★ is the "&#9733;" symbol
+      } else {
+        return '★'.repeat(2); // Return an empty string for invalid star ratings
       }
-      return star + ' stars'
     },
     async calculateHotelEmissions(stars) {
       const url = 'https://carbonsutra1.p.rapidapi.com/hotel_estimate';
@@ -220,7 +241,7 @@ export default {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
           Authorization: 'Bearer fQ98oU704xFvsnXcQLVDbpeCJHPglG1DcxiMLKfpeNEMGumlbzVf1lCI6ZBx',
-          'X-RapidAPI-Key': 'ec30787aecmsha7e44713edd7b72p1739d0jsn0344ed976c69',
+          'X-RapidAPI-Key': '0e578a0bd6mshd6db73d924875efp19b709jsnac99ae689b3f',
           'X-RapidAPI-Host': 'carbonsutra1.p.rapidapi.com',
         },
         body: new URLSearchParams({
@@ -249,7 +270,7 @@ export default {
       if (column !== this.sortBy) {
         this.sortBy = column;
         this.sortDirection = "asc";
-      } 
+      }
       else {
         // If the same column is clicked, toggle the sorting direction
         this.sortDirection = this.sortDirection == "asc" ? "desc" : "asc";
@@ -266,11 +287,20 @@ export default {
         }
       });
     }
-},
+  },
 };
 </script>
 
 <style scoped>
+table {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+th, td {
+  vertical-align: middle;
+}
+
 #searchInput {
   margin-top: 20px;
 }
@@ -319,10 +349,42 @@ a:hover {
   height: 30px;
   animation: spin 2s linear infinite;
 }
+
 th.sortable-header span {
   margin-left: 4px;
   font-size: 12px;
   vertical-align: middle;
+}
+
+.pick-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pick-container__title {
+  margin: 0 auto;
+  text-align: center;
+  color: #000;
+  max-width: 50rem;
+}
+
+.pick-container__title p {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #888;
+  line-height: 1.5;
+}
+
+.pick-container__title h3 {
+  font-size: 24px;
+  font-family: Arial, sans-serif;
+  font-weight: 500;
+}
+
+.pick-container__title h2 {
+  font-size: 32px;
+  font-family: Arial, sans-serif;
+  margin: 0.5rem 0 1rem 0;
 }
 
 /* Add some styles to the double-sided arrow to make it more prominent */

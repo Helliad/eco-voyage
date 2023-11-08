@@ -3,8 +3,7 @@
     <div class="row">
       <div class='col-8'>
         <div class="travel-package">
-          <img src="../assets/inpackage1.png" alt="Travel Package Image" class="travel-package-image"
-            style="max-width: 400px;">
+          <img src="../assets/inpackage1.png" alt="Travel Package Image" class="travel-package-image">
           <div class="travel-package-details">
             <h1 class="display-3 fw-bold mb-3"><u class="text-warning">
                 <p class="text-success">{{ packageName }}</p>

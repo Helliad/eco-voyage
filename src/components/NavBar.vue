@@ -11,10 +11,10 @@
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
-          <a class="nav-link" @click="openHTMLPage" id="baliGame">Bali Game</a>
+          <a class="nav-link" @click="openHTMLPage" id="baliGame">PixelBali</a>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
-          <router-link class="nav-link" to="/rental">Rental View</router-link>
+          <router-link class="nav-link" to="/rental">Eco-Vehicles</router-link>
         </li>
         <li class="nav-item" @click="isNavbarCollapsed = false">
           <router-link class="nav-link" to="/accoms">Accomodations</router-link>

@@ -25,10 +25,10 @@
             </div>
 
             <button class="btn btn-success" @click="CarEmissions">
-              Calculate Emissions
+              <b>Calculate Emissions</b>
             </button>
             <button class="btn btn-outlined-secondary" @click="clearForm">
-              Clear
+              <b>Clear</b>
             </button>
             <div v-if="avgEmi || caremissions">
               <p class="co2-saved">

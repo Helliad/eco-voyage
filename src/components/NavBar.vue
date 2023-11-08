@@ -36,7 +36,7 @@ export default {
       this.isNavbarCollapsed = !this.isNavbarCollapsed;
     },
     openHTMLPage() {
-      window.location.href = 'http://127.0.0.1:5500/pokemon-game/game.html';
+      window.location.href = 'https://ecovoyage-game.netlify.app/';
     }
 
   },

@@ -209,7 +209,7 @@ export default {
     },
     geocodeAddress(address, callback) {
       this.geocoder.geocode({ address: address }, (results, status) => {
-        console.log({ results, status });
+        // console.log({ results, status });
         if (status === "OK" && results[0].geometry.location) {
           const location = results[0].geometry.location;
           callback(location);

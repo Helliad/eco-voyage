@@ -16,11 +16,11 @@
                             <select id="noStars" v-model="rating" class="form-control">
                                 <option class="text-center" value="&#9733;&#9733;&#9733;&#9733;&#9733;">
                                     &#9733;&#9733;&#9733;&#9733;&#9733;</option>
-                                <option class="text-center" value="&#9733;&#9733;&#9733;&#9733;">
+                                <option class="text-center" value="&#9733;&#9733;&#9733;&#9733;&#9734;">
                                     &#9733;&#9733;&#9733;&#9733;</option>
-                                <option class="text-center" value="&#9733;&#9733;&#9733;">&#9733;&#9733;&#9733;</option>
-                                <option class="text-center" value="&#9733;&#9733;">&#9733;&#9733;</option>
-                                <option class="text-center" value="&#9733;">&#9733;</option>
+                                <option class="text-center" value="&#9733;&#9733;&#9733;&#9734;&#9734;">&#9733;&#9733;&#9733;</option>
+                                <option class="text-center" value="&#9733;&#9733;&#9734;&#9734;&#9734;">&#9733;&#9733;</option>
+                                <option class="text-center" value="&#9733;&#9734;&#9734;&#9734;&#9734;">&#9733;</option>
                             </select>
                         </div>
                         <div class="form-group">
